@@ -9,18 +9,21 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    loginpage.cpp
+    Login_Sign_page/login_sign_page.cpp \
+    main.cpp
 
 HEADERS += \
     Book.h \
-    User.h \
-    loginpage.h
+    Login_Sign_page/login_sign_page.h \
+    User.h
 
 FORMS += \
-    loginpage.ui
+    Login_Sign_page/login_sign_page.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Recources.qrc

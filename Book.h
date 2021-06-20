@@ -16,7 +16,9 @@ private:
     QString Publisher       ;
 //  QString BookFileName    ;
     int     AvailableCopies ;
+
 public :
+
     QList<QString> Gunre ;
 
 Book (QString BookName="" , QString Writer="" , QString Publisher ="" ,int AvailableCopies = 0)
@@ -30,6 +32,7 @@ Book (QString BookName="" , QString Writer="" , QString Publisher ="" ,int Avail
     }
 
 //getters :
+
 QString getBookName() const
     {
     return BookName;
@@ -47,7 +50,7 @@ QString getPublisher() const
 
 QString getBookFileName() const
 {
-return Writer +"-"+BookName+".txt"  ;
+return Writer +"-"+BookName+Publisher+".txt"  ;
 }
 
 int     getAvailableCopies() const
@@ -85,9 +88,7 @@ bool operator== (Book A)
     return false;
     }
 
-
-
-void operator>> (QTextStream &qts)//write to file
+void operator >> (QTextStream &qts)//write to file
 {
 qts<<this->BookName<<":"<<this->Writer<<":"<<this->Publisher<<":"<< this->AvailableCopies<<"|" ;
 
@@ -103,7 +104,7 @@ for(auto itr = this->Gunre.begin() ; itr !=this->Gunre.end() ; itr++)
 qts<<"\n"  ;
 }
 
-void operator<< (QTextStream &qts)//read from file
+void operator << (QTextStream &qts)//read from file
 {
 QStringList qsl  = qts.readLine().split('|') ;
 
@@ -124,7 +125,5 @@ for(int i=0 ; i < qsl2.size() ; i++ )
 }
 
 };
-
-
 
 #endif // BOOK_H
