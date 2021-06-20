@@ -15,9 +15,9 @@ class User
 {
 private:
 
-    QString User_name ;
+    QString     User_name ;
     long long   User_pass_hash ;
-    QString Email ;
+    QString     Email ;
 
 public:
     User(QString User_name ="" , string   User_pass ="" ,QString Email ="" )
@@ -60,6 +60,7 @@ void  set_user_pass_hash (long long hash)
     {
     this->User_pass_hash =hash ;
     }
+
 
 bool operator == (User tmp)
 {

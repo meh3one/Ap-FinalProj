@@ -13,6 +13,7 @@ SOURCES += \
     loginpage.cpp
 
 HEADERS += \
+    Book.h \
     User.h \
     loginpage.h
 
