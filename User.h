@@ -20,10 +20,10 @@ private:
     QString     Email ;
 
 public:
-    User(QString User_name ="" , string   User_pass ="" ,QString Email ="" )
+    User(QString User_name ="" , QString   User_pass ="" ,QString Email ="" )
     {
     this->User_name = User_name ;
-    this->User_pass_hash = std::hash<std::string>{}(User_pass); //saves the password hash
+    this->User_pass_hash = std::hash<std::string>{}(User_pass.toStdString()); //saves the password hash
     this->Email =Email ;
     }
 

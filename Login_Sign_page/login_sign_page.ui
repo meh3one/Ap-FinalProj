@@ -158,6 +158,16 @@
      </item>
     </layout>
    </widget>
+   <widget class="QTextBrowser" name="Output">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>430</y>
+      <width>256</width>
+      <height>71</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
