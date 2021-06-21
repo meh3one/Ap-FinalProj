@@ -31,7 +31,7 @@ Book (QString BookName="" , QString Writer="" , QString Publisher ="" ,int Avail
     this-> Publisher    = Publisher ;
     this-> AvailableCopies = AvailableCopies ;
 
-//  this-> BookFileName = Writer +"-"+BookName +"\n";
+//  BookFileName = Writer-BookName.txt  ;
     }
 
 //getters :
@@ -56,36 +56,36 @@ QString getBookFileName() const
     return Writer +"-"+BookName+"-"+Publisher+".txt"  ;
     }
 
-int     getAvailableCopies() const
+int     getAvailableCopies()
     {
-    return AvailableCopies;
+    return AvailableCopies ;
     }
 
 //setters :
 
 void setWriter(const QString &value)
-{
-Writer = value;
-}
+    {
+    Writer = value;
+    }
 
 void setPublisher(const QString &value)
-{
-Publisher = value;
-}
+    {
+    Publisher = value;
+    }
 
 void setBookName(const QString &value)
-{
-BookName = value;
-}
+    {
+    BookName = value;
+    }
 
 void setAvailableCopies(int copies)
-{
-AvailableCopies = copies;
-}
+    {
+    AvailableCopies = copies;
+    }
 
 bool operator== (Book A)
     {
-    if( this->BookName == A.BookName && this->Writer == A.Writer && this->Publisher == A.Publisher)
+    if( this->BookName == A.BookName && this->Writer == A.Writer )
         return true;
 
     return false;

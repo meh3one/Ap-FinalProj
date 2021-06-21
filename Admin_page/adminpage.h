@@ -6,6 +6,8 @@
 #include <User.h>
 #include <Book.h>
 
+#include <QListWidgetItem>
+
 namespace Ui {
 class AdminPage;
 }
@@ -26,6 +28,8 @@ public:
 
 private slots:
     void on_AddBook_botton_clicked();
+
+    void on_BookList_Widget_output_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::AdminPage *ui;

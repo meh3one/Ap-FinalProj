@@ -1,6 +1,7 @@
 #include "adminpage.h"
 #include "ui_adminpage.h"
 
+#include <string>
 
 //forward declares
 template <typename T >
@@ -23,8 +24,9 @@ Save_File_to_List <Book> (Book_List   , ".//BookFile//BookData.txt") ;
 
 //this->ui ->label_2->setText("test1") ;
 
-for(auto x : Book_List)                                                 //UpDates The List of Books
-    this->ui->BookList_Widget_output->addItem( x.getBookName() ) ;
+for(auto x : Book_List)                                //UpDates The List of Books
+    this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
+
 
 }
 
@@ -87,9 +89,6 @@ QString Text = this->ui->AddBook_DigCoppy->toPlainText() ;
 
 
 
-
-
-
 //============================================Other Functions
 template <typename T >
 void Save_File_to_List(QList<T> & List , QString FileAddress)
@@ -119,4 +118,36 @@ void Save_List_To_File(QList<T> & List , QString FileAddress)
         File.close() ;
 
 }
+
+
+void AdminPage::on_BookList_Widget_output_itemClicked(QListWidgetItem * item)
+{
+
+QStringList qsl = item ->text().split('-') ;
+Book TheBook(qsl[0] , qsl[1] ) ;
+
+int index = Book_List.indexOf(TheBook) ; //finds where is the book with this name and writer
+TheBook = Book_List[index] ;             //fills the test of information about the book
+
+this->ui->Read_Name_lable    -> setText("BookName  :  " + TheBook.getBookName ())  ;
+this->ui->Read_Writer_lable  -> setText("TheWriter :  " + TheBook.getWriter   ())  ;
+this->ui->Read_pub_lable     -> setText("ThePublisher : "+ TheBook.getPublisher())  ;
+this->ui->Read_avalablecopies-> setText("copies       : "+ QString ( TheBook.getAvailableCopies())  ) ;
+int A =TheBook.getAvailableCopies() ;
+
+
+this->ui->pushButton_4->setText( QString(A) ) ;
+QFile File(".//BookFile//" + TheBook.getBookFileName() ) ;
+    File.open(QFile::Text | QFile::ReadOnly) ;
+    QTextStream qts(&File) ;
+
+this->ui->Read__output ->setText( qts .readAll() ) ;
+
+    File.close() ;
+
+
+
+}
+
+
 
