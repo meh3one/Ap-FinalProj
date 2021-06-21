@@ -9,15 +9,18 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Admin_page/adminpage.cpp \
     Login_Sign_page/login_sign_page.cpp \
     main.cpp
 
 HEADERS += \
+    Admin_page/adminpage.h \
     Book.h \
     Login_Sign_page/login_sign_page.h \
     User.h
 
 FORMS += \
+    Admin_page/adminpage.ui \
     Login_Sign_page/login_sign_page.ui
 
 # Default rules for deployment.

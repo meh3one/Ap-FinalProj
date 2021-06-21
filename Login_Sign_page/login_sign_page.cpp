@@ -34,7 +34,9 @@ Login_Sign_page::~Login_Sign_page()
     Save_List_To_File <User> (Admins_list , ".//UsersFile//Admins.txt") ;
     delete ui;   
 }
+
 //===============================================SLOTs :
+
 void Login_Sign_page::on_SignUp_Bottom_clicked()
 {
 QString UserName =  this->ui->Sign_UserName_input->text()  ;
