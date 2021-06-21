@@ -7,6 +7,8 @@
 #include <QTextStream>
 #include <QFile>
 
+#include <User.h>
+
 class Book
 {
 private:
@@ -17,8 +19,9 @@ private:
 //  QString BookFileName    ;
     int     AvailableCopies ;
 
-public :
 
+public :
+    QList<QString> ListOfLended ;
     QList<QString> Gunre ;
 
 Book (QString BookName="" , QString Writer="" , QString Publisher ="" ,int AvailableCopies = 0)
@@ -26,7 +29,7 @@ Book (QString BookName="" , QString Writer="" , QString Publisher ="" ,int Avail
     this-> BookName     = BookName ;
     this-> Writer       = Writer ;
     this-> Publisher    = Publisher ;
-    this->AvailableCopies = AvailableCopies ;
+    this-> AvailableCopies = AvailableCopies ;
 
 //  this-> BookFileName = Writer +"-"+BookName +"\n";
     }
@@ -49,14 +52,14 @@ QString getPublisher() const
     }
 
 QString getBookFileName() const
-{
-return Writer +"-"+BookName+Publisher+".txt"  ;
-}
+    {
+    return Writer +"-"+BookName+"-"+Publisher+".txt"  ;
+    }
 
 int     getAvailableCopies() const
-{
-return AvailableCopies;
-}
+    {
+    return AvailableCopies;
+    }
 
 //setters :
 
@@ -90,15 +93,25 @@ bool operator== (Book A)
 
 void operator >> (QTextStream &qts)//write to file
 {
+//====How it will Look in file
+//BookName:Writer:Publisher:AvailableCopies|Gunre1:Gunre2 ... |Lended1:lended2 ...
+
 qts<<this->BookName<<":"<<this->Writer<<":"<<this->Publisher<<":"<< this->AvailableCopies<<"|" ;
 
-for(auto itr = this->Gunre.begin() ; itr !=this->Gunre.end() ; itr++)
+for(auto x : Gunre)
+    if( x != "" )
     {
-    if( *itr == "" )
-        break;
-
-    qts<<*itr   ;
+    qts<<x   ;
     qts<<":"    ;
+    }
+
+qts<<"|" ;
+
+for(auto x : ListOfLended)
+    if(x !="")
+    {
+        qts << x ;
+        qts << ":" ;
     }
 
 qts<<"\n"  ;
@@ -106,22 +119,29 @@ qts<<"\n"  ;
 
 void operator << (QTextStream &qts)//read from file
 {
+//====How it will Look in file
+//BookName:Writer:Publisher:AvailableCopies|Gunre1:Gunre2 ... |Lended1:lended2 ...
+
 QStringList qsl  = qts.readLine().split('|') ;
 
-QStringList qsl1 = qsl[0].split(':')  ;
-QStringList qsl2 = qsl[1].split(':')  ;
+QStringList qsl1       = qsl[0].split(':')  ;
+QStringList Gunre_qsl  = qsl[1].split(':')  ;
+QStringList Lended_qsl = qsl[2].split(':')  ;
 
-this->BookName = qsl1[0] ;
-
-this->Writer = qsl1[1]    ;
-this->Publisher = qsl1[2] ;
+this->BookName        = qsl1[0] ;
+this->Writer          = qsl1[1]    ;
+this->Publisher       = qsl1[2] ;
 this->AvailableCopies = qsl1[3].toInt() ;
 
 
-for(int i=0 ; i < qsl2.size() ; i++ )
-    if(qsl2[i] != "" )
-        this->Gunre.append(qsl2[i]) ;
+for(int i=0 ; i < Gunre_qsl.size() ; i++ )
+    if(Gunre_qsl.at(i) != "" )
+        this->Gunre.append(Gunre_qsl.at(i)) ;
 
+
+for(int i=0 ; i < Lended_qsl.size() ; i++ )
+    if(Lended_qsl.at(i) != "" )
+        this-> ListOfLended.append( Lended_qsl.at(i) ) ;
 }
 
 };

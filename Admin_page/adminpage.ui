@@ -14,68 +14,174 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="gridLayoutWidget">
+   <widget class="QListWidget" name="BookList_Widget_output">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>110</y>
-      <width>391</width>
-      <height>211</height>
+      <x>30</x>
+      <y>30</y>
+      <width>131</width>
+      <height>321</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_3"/>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>30</y>
+      <width>221</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="ob3">
+     <item row="4" column="1">
+      <widget class="QPushButton" name="pushButton_4">
        <property name="text">
-        <string>TextLabel</string>
+        <string>Delete</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="lineEdit_4"/>
-     </item>
-     <item row="4" column="0">
+     <item row="0" column="0" colspan="2">
       <widget class="QPushButton" name="pushButton">
        <property name="text">
-        <string>PushButton</string>
+        <string>Lend</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>Retreve</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>Edit</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="Read_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>200</y>
+      <width>311</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="Read_Widget">
+     <item row="2" column="0">
+      <widget class="QLabel" name="Read_Writer_lable">
+       <property name="text">
+        <string>Writer</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="Read_Name_lable">
        <property name="text">
-        <string>TextLabel</string>
+        <string>Book name</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_2"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="Read_pub_lable">
        <property name="text">
-        <string>TextLabel</string>
+        <string>Publisher</string>
        </property>
       </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QTextBrowser" name="Read__output"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="Read_avalablecopies">
+       <property name="text">
+        <string>Available coppies</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="AddBook_Widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>0</y>
+      <width>291</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="AddBook_lable_2">
+       <property name="text">
+        <string>Book Writer</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="AddBook_lable_4">
+       <property name="text">
+        <string>available copies</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="AddBook_Writer_input"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="AddBook_Name_input"/>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="AddBook_lable_3">
        <property name="text">
-        <string>TextLabel</string>
+        <string>Book Publisher</string>
        </property>
       </widget>
      </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="AddBook_Pub_input"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="AddBook_lable">
+       <property name="text">
+        <string>BookName</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="AddBook_copies_input"/>
+     </item>
      <item row="5" column="0" colspan="2">
-      <widget class="QTextBrowser" name="textBrowser"/>
+      <widget class="QTextBrowser" name="AddBook__output"/>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <widget class="QPushButton" name="AddBook_botton">
+       <property name="text">
+        <string>Add Book</string>
+       </property>
+      </widget>
      </item>
      <item row="0" column="2" rowspan="5">
-      <widget class="QTextEdit" name="textEdit"/>
+      <widget class="QTextEdit" name="AddBook_DigCoppy"/>
      </item>
     </layout>
    </widget>
