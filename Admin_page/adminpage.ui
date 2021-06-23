@@ -14,49 +14,39 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListWidget" name="BookList_Widget_output">
+   <widget class="QWidget" name="BookEdit_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>131</width>
-      <height>321</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>30</y>
+      <x>240</x>
+      <y>40</y>
       <width>221</width>
       <height>131</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="ob3">
      <item row="4" column="1">
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="Deletethebook">
        <property name="text">
         <string>Delete</string>
        </property>
       </widget>
      </item>
      <item row="0" column="0" colspan="2">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="Lend_botton">
        <property name="text">
         <string>Lend</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0" colspan="2">
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="retrevebotton">
        <property name="text">
         <string>Retreve</string>
        </property>
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="Edit_button">
        <property name="text">
         <string>Edit</string>
        </property>
@@ -80,8 +70,8 @@
    <widget class="QWidget" name="Read_widget" native="true">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>200</y>
+      <x>490</x>
+      <y>190</y>
       <width>311</width>
       <height>201</height>
      </rect>
@@ -91,6 +81,13 @@
       <widget class="QLabel" name="Read_Writer_lable">
        <property name="text">
         <string>Writer</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="Read_avalablecopies">
+       <property name="text">
+        <string>Available coppies</string>
        </property>
       </widget>
      </item>
@@ -110,13 +107,6 @@
      </item>
      <item row="0" column="0" colspan="2">
       <widget class="QTextBrowser" name="Read__output"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="Read_avalablecopies">
-       <property name="text">
-        <string>Available coppies</string>
-       </property>
-      </widget>
      </item>
     </layout>
    </widget>
@@ -182,6 +172,28 @@
      </item>
      <item row="0" column="2" rowspan="5">
       <widget class="QTextEdit" name="AddBook_DigCoppy"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>160</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="leftsidebar">
+     <item>
+      <widget class="QPushButton" name="AddBook_widget_botton">
+       <property name="text">
+        <string>AddBook</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="BookList_Widget_output"/>
      </item>
     </layout>
    </widget>
