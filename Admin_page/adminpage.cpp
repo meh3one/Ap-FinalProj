@@ -38,6 +38,12 @@ AdminPage::~AdminPage()
 }
 //===========================================Slots
 
+void AdminPage::on_AddBook_widget_botton_clicked()
+{
+    RefreshAll() ;
+    this->ui->AddBook_Widget ->setVisible(true) ;
+}
+
 void AdminPage::on_AddBook_botton_clicked()
 {
 
@@ -117,14 +123,8 @@ RefreshAll() ;
 this->ui->Read_widget ->setVisible(true) ;
 }
 
-void AdminPage::on_AddBook_widget_botton_clicked()
-{
-    RefreshAll() ;
-    this->ui->AddBook_Widget ->setVisible(true) ;
-}
-
-
 //where we left off
+
 void AdminPage::on_BookList_Widget_output_itemDoubleClicked(QListWidgetItem *item)
 {
 RefreshAll() ;

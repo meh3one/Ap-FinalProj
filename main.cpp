@@ -3,9 +3,15 @@
 
 #include <QApplication>
 
+#include <direct.h>
+
 int main(int argc, char *argv[])
 {
+
     QApplication a(argc, argv);
+
+    _mkdir(".\\BookFile") ;
+    _mkdir(".\\UsersFile") ;
 
 //    Login_Sign_page w;
 //    w.show();
