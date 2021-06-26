@@ -220,12 +220,12 @@ int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List )
 template <typename T >
 void Save_File_to_List(QList<T> & List , QString FileAddress)
 {
-T Tmp ;//temporary itrator
 QFile File (FileAddress) ;  //oppen file
     File.open(QFile::Text | QFile::ReadOnly) ;
     QTextStream qts(&File) ;
         while(! qts.atEnd())
         {
+        T Tmp ;//temporary itrator
         Tmp << qts  ;
         List.append(Tmp) ;
         }
