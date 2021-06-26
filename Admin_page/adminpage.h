@@ -44,6 +44,8 @@ private slots:
 
     void on_AddBook_widget_botton_clicked();
 
+    void on_Edit_button_clicked();
+
 private:
     Ui::AdminPage *ui;
 };

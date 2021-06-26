@@ -141,6 +141,14 @@ this->ui->BookEdit_Widget->setVisible (true) ;
 }
 
 
+
+void AdminPage::on_Edit_button_clicked()
+{
+    this ->ui ->Edit_gunre_Widget->setVisible(true) ;
+
+}
+
+
 void AdminPage::on_Deletethebook_clicked()
 {
 
@@ -162,12 +170,12 @@ HideAll() ;
 void AdminPage::HideAll()
 {
 
-this->ui->AddBook_Widget->setVisible (false) ;
-this->ui->BookEdit_Widget->setVisible(false) ;
-this->ui->Read_widget ->setVisible   (false) ;
+this->ui->AddBook_Widget->setVisible (false)   ;
+this->ui->BookEdit_Widget->setVisible(false)   ;
+this->ui->Read_widget ->setVisible   (false)   ;
+this->ui->Edit_gunre_Widget->setVisible(false) ;
 
 //one object must be seted visible after this function
-//item index must be setted
 }
 
 void AdminPage::RefreshList()
@@ -219,7 +227,6 @@ int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List )
 
     return index ;
 }
-
 
 
 

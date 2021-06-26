@@ -17,10 +17,10 @@
    <widget class="QWidget" name="BookEdit_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>60</y>
+      <x>260</x>
+      <y>10</y>
       <width>221</width>
-      <height>131</height>
+      <height>221</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="ob3">
@@ -215,7 +215,7 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>0</x>
       <y>50</y>
       <width>160</width>
       <height>361</height>
@@ -231,6 +231,198 @@
      </item>
      <item>
       <widget class="QListWidget" name="BookList_Widget_output"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="Edit_gunre_Widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>250</y>
+      <width>191</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="1">
+        <widget class="QComboBox" name="Gunre_Add_combo">
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Horror</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Fantasy</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Religion</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Novel</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Poem</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Psychology</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>New Item</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Love Story</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="GunreAdd_lable">
+         <property name="text">
+          <string>Add Gunre :</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="Gunre_rem_combo">
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Horror</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Fantasy</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Religion</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Novel</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Poem</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Psychology</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>New Item</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Love Story</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="GunreRem_lable">
+         <property name="text">
+          <string>Remove Gunre :</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="Gunre_commit_button">
+       <property name="text">
+        <string>Commit</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="Gunre_name_lable">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
+      <widget class="QRadioButton" name="Gunre_admit_ratio">
+       <property name="text">
+        <string>Sure ??</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
