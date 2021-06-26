@@ -8,9 +8,11 @@ template <typename T >
 void Save_File_to_List(QList<T> & List , QString FileAddress) ;
 
 template <typename T >
-void Save_List_To_File(QList<T> & List , QString FileAddress) ;;
+void Save_List_To_File(QList<T> & List , QString FileAddress) ;
 
-//
+int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List ) ;
+
+//===========================================Constractor
 AdminPage::AdminPage(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::AdminPage)
@@ -23,8 +25,8 @@ Save_File_to_List <Book> (Book_List   , ".//BookFile//BookData.txt") ;
     ui->setupUi(this);
 
 
-
-RefreshAll() ;
+RefreshList() ;
+HideAll()     ;
 
 }
 
@@ -36,20 +38,22 @@ AdminPage::~AdminPage()
 
     delete ui;
 }
+
 //===========================================Slots
 
 void AdminPage::on_AddBook_widget_botton_clicked()
 {
-    RefreshAll() ;
+    HideAll()     ;
+    this->ui->AddBook_DigCoppy->setVisible(false) ;
     this->ui->AddBook_Widget ->setVisible(true) ;
 }
 
 void AdminPage::on_AddBook_botton_clicked()
 {
 
-QString BookName = this->ui->AddBook_Name_input->text() ;
-QString Writer   = this->ui->AddBook_Writer_input->text() ;
-QString Publisher = this->ui->AddBook_Pub_input->text() ;
+QString BookName        = this->ui->AddBook_Name_input->text() ;
+QString Writer          = this->ui->AddBook_Writer_input->text() ;
+QString Publisher       = this->ui->AddBook_Pub_input->text() ;
 QString AvailableCopies = this->ui->AddBook_copies_input->text() ;
 
 QString Text = this->ui->AddBook_DigCoppy->toPlainText() ;
@@ -70,7 +74,6 @@ QString Text = this->ui->AddBook_DigCoppy->toPlainText() ;
 
     Book NewBook(BookName , Writer , Publisher, AvailableCopies.toInt()) ;
 
-
     if(Book_List.contains(NewBook))
         {
         this->ui->AddBook__output->setText("The Book Alredy exist") ;
@@ -85,31 +88,30 @@ QString Text = this->ui->AddBook_DigCoppy->toPlainText() ;
         QFile File(".//BookFile//"+ NewBook.getBookFileName() ) ;  //oppen file
             File.open(QFile::Text | QFile::WriteOnly) ;
             QTextStream qts(&File) ;
-            qts <<Text ;
+            qts << Text ;
 
         File.close() ;
         }
 
-RefreshAll() ;
-this->ui->AddBook_Widget->setVisible(true) ;
+RefreshList() ;
 
 }
 
 void AdminPage::on_BookList_Widget_output_itemClicked(QListWidgetItem * item)
-{
-QStringList qsl = item ->text().split('-') ;
-Book TheBook(qsl[0] , qsl[1] ) ;
+{    
+Last_clicked_item =item ;
+item=nullptr ;
+Book TheBook = Book_List[ FindBook_Index( Last_clicked_item , Book_List) ] ;
+Last_clicked_item = nullptr ;
 
-int index = Book_List.indexOf(TheBook) ; //finds where is the book with this name and writer
-TheBook = Book_List[index] ;             //fills the test of information about the book
-
-this->ui->Read_Name_lable    -> setText("BookName  :  " + TheBook.getBookName ())  ;
-this->ui->Read_Writer_lable  -> setText("TheWriter :  " + TheBook.getWriter   ())  ;
-this->ui->Read_pub_lable     -> setText("ThePublisher : "+ TheBook.getPublisher())  ;
-this->ui->Read_avalablecopies-> setText("copies       : " + QString::number ( TheBook.getAvailableCopies())  ) ;
+this->ui->Read_Name_lable     -> setText("BookName  :  " + TheBook.getBookName ())  ;
+this->ui->Read_Writer_lable   -> setText("TheWriter :  " + TheBook.getWriter   ())  ;
+this->ui->Read_pub_lable      -> setText("ThePublisher : "+ TheBook.getPublisher())  ;
+this->ui->Read_avalablecopies -> setText("copies       : " + QString::number ( TheBook.getAvailableCopies())  ) ;
 
 
-//Read Book Text from file
+//Read Book Text from file:
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Check if the book has a file
 QFile File(".//BookFile//" + TheBook.getBookFileName() ) ;
     File.open(QFile::Text | QFile::ReadOnly) ;
     QTextStream qts(&File) ;
@@ -117,40 +119,63 @@ QFile File(".//BookFile//" + TheBook.getBookFileName() ) ;
 this->ui->Read__output ->setText( qts .readAll() ) ;
 
     File.close() ;
+//close the file
 
 
-RefreshAll() ;
+RefreshList() ;
+HideAll()     ;
 this->ui->Read_widget ->setVisible(true) ;
 }
 
-//where we left off
-
 void AdminPage::on_BookList_Widget_output_itemDoubleClicked(QListWidgetItem *item)
 {
-RefreshAll() ;
-this->ui->BookEdit_Widget->setVisible(true) ;
+Last_clicked_item = item ;
+item =nullptr ;
 
+HideAll()     ;
+
+this->ui->Edit_name_lable -> setText( Last_clicked_item -> text()) ;
+
+this->ui->BookEdit_Widget->setVisible (true) ;
 
 }
+
 
 void AdminPage::on_Deletethebook_clicked()
 {
 
+int TheBook_index = FindBook_Index( Last_clicked_item , Book_List) ;
+Last_clicked_item = nullptr ;
 
+QFile :: remove(".//BookFile//" + Book_List.at(TheBook_index).getBookFileName()) ;
+
+Book_List.removeAt( TheBook_index ) ;
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Print that the book was deleted
+
+RefreshList() ;
+HideAll() ;
 }
 
 
 //============================================Other Functions
-void AdminPage::RefreshAll()
+void AdminPage::HideAll()
 {
-ui->BookList_Widget_output->clear() ;
-
-for(auto x : Book_List)                                      //UpDates The List of Books
-    this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
 
 this->ui->AddBook_Widget->setVisible (false) ;
 this->ui->BookEdit_Widget->setVisible(false) ;
 this->ui->Read_widget ->setVisible   (false) ;
+
+//one object must be seted visible after this function
+//item index must be setted
+}
+
+void AdminPage::RefreshList()
+{
+ui->BookList_Widget_output->clear() ;                        //UpDates The List of Books
+for(auto x : Book_List)
+    this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
+
 }
 
 
@@ -183,6 +208,17 @@ void Save_List_To_File(QList<T> & List , QString FileAddress)
 
 }
 
+
+int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List )
+{
+
+    QStringList qsl = item ->text().split('-') ;
+    Book TheBook(qsl[0] , qsl[1] ) ;
+
+    int index = Book_List.indexOf(TheBook) ; //finds where is the book with this name and writer
+
+    return index ;
+}
 
 
 

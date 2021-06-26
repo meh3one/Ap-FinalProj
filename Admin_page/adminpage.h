@@ -21,13 +21,16 @@ public:
     QList<User>  Admins_list  ;
     QList<Book>  Book_List    ;
 
+    QListWidgetItem * Last_clicked_item ;
 
     explicit
     AdminPage(QWidget *parent = nullptr);
 
-    ~AdminPage();
+    ~AdminPage()       ;
 
-    void RefreshAll() ;
+    void HideAll()     ;
+
+    void RefreshList() ;
 
 private slots:
     void on_AddBook_botton_clicked();
