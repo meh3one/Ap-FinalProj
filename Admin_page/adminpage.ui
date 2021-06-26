@@ -110,10 +110,17 @@
       <x>490</x>
       <y>190</y>
       <width>311</width>
-      <height>201</height>
+      <height>191</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="Read_Widget">
+     <item row="1" column="0">
+      <widget class="QLabel" name="Read_Name_lable">
+       <property name="text">
+        <string>Book name</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="0">
       <widget class="QLabel" name="Read_Writer_lable">
        <property name="text">
@@ -128,13 +135,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="Read_Name_lable">
-       <property name="text">
-        <string>Book name</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="1">
       <widget class="QLabel" name="Read_pub_lable">
        <property name="text">
@@ -144,6 +144,13 @@
      </item>
      <item row="0" column="0" colspan="2">
       <widget class="QTextBrowser" name="Read__output"/>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <widget class="QLabel" name="Read_Gunre_lable">
+       <property name="text">
+        <string>Gunres :</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -250,12 +257,12 @@
         <widget class="QComboBox" name="Gunre_Add_combo">
          <item>
           <property name="text">
-           <string>None</string>
+           <string>Horror</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Horror</string>
+           <string>None</string>
           </property>
          </item>
          <item>
@@ -425,6 +432,32 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="labe_1l">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>460</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>460</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
    </widget>
   </widget>
  </widget>

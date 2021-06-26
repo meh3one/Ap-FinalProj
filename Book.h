@@ -101,7 +101,7 @@ qts<<this->BookName<<":"<<this->Writer<<":"<<this->Publisher<<":"<< this->Availa
 for(auto x : Gunre)
     if( x != "" )
     {
-    qts<<x   ;
+    qts<< x   ;
     qts<<":"    ;
     }
 
@@ -125,8 +125,8 @@ void operator << (QTextStream &qts)//read from file
 QStringList qsl  = qts.readLine().split('|') ;
 
 QStringList qsl1       = qsl[0].split(':')  ;
-QStringList Gunre_qsl  = qsl[1].split(':')  ;
-QStringList Lended_qsl = qsl[2].split(':')  ;
+
+
 
 this->BookName        = qsl1[0] ;
 this->Writer          = qsl1[1]    ;
@@ -134,14 +134,21 @@ this->Publisher       = qsl1[2] ;
 this->AvailableCopies = qsl1[3].toInt() ;
 
 
-for(int i=0 ; i < Gunre_qsl.size() ; i++ )
-    if(Gunre_qsl.at(i) != "" )
-        this->Gunre.append(Gunre_qsl.at(i)) ;
+if(qsl[1] != "")
+    {
+    QStringList Gunre_qsl  = qsl[1].split(':')  ;
+    for(auto x :Gunre_qsl)
+        if(x != "")
+            this->Gunre.append(x) ;
+    }
 
-
-for(int i=0 ; i < Lended_qsl.size() ; i++ )
-    if(Lended_qsl.at(i) != "" )
-        this-> ListOfLended.append( Lended_qsl.at(i) ) ;
+if(qsl[2] != "")
+    {
+    QStringList Lended_qsl = qsl[2].split(':')  ;
+    for(auto x : Lended_qsl)
+        if(x != "")
+            this->ListOfLended.append(x) ;
+    }
 }
 
 };

@@ -109,6 +109,13 @@ this->ui->Read_Writer_lable   -> setText("TheWriter :  " + TheBook.getWriter   (
 this->ui->Read_pub_lable      -> setText("ThePublisher : "+ TheBook.getPublisher())  ;
 this->ui->Read_avalablecopies -> setText("copies       : " + QString::number ( TheBook.getAvailableCopies())  ) ;
 
+QString Gunres ="Gunres : " ;
+
+for(auto x : TheBook.Gunre )
+    Gunres = Gunres + x + " - " ;
+
+this->ui->Read_Gunre_lable->setText(Gunres) ;
+
 
 //Read Book Text from file:
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Check if the book has a file
@@ -141,14 +148,6 @@ this->ui->BookEdit_Widget->setVisible (true) ;
 }
 
 
-
-void AdminPage::on_Edit_button_clicked()
-{
-    this ->ui ->Edit_gunre_Widget->setVisible(true) ;
-
-}
-
-
 void AdminPage::on_Deletethebook_clicked()
 {
 
@@ -165,6 +164,26 @@ RefreshList() ;
 HideAll() ;
 }
 
+
+void AdminPage::on_Edit_button_clicked()
+{
+int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
+
+
+    this ->ui ->Edit_gunre_Widget->setVisible(true) ;
+    this ->ui ->Gunre_name_lable->setText(Last_clicked_item->text()) ;
+
+
+//filling the remove combo box from the gunres from book
+
+this->ui->Gunre_rem_combo->clear() ;
+    this->ui->Gunre_rem_combo ->addItem("None") ;
+        for(auto x : Book_List[book_index].Gunre)
+            this->ui->Gunre_rem_combo ->addItem(x) ;
+
+
+
+}
 
 //============================================Other Functions
 void AdminPage::HideAll()
@@ -184,6 +203,17 @@ ui->BookList_Widget_output->clear() ;                        //UpDates The List 
 for(auto x : Book_List)
     this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
 
+}
+
+int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List )
+{
+
+    QStringList qsl = item ->text().split('-') ;
+    Book TheBook(qsl[0] , qsl[1] ) ;
+
+    int index = Book_List.indexOf(TheBook) ; //finds where is the book with this name and writer
+
+    return index ;
 }
 
 
@@ -216,18 +246,36 @@ void Save_List_To_File(QList<T> & List , QString FileAddress)
 
 }
 
+//==================================================
 
-int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List )
+
+
+
+void AdminPage::on_Gunre_commit_button_clicked()
 {
+if (! this->ui->Gunre_admit_ratio->isChecked())
+    {
 
-    QStringList qsl = item ->text().split('-') ;
-    Book TheBook(qsl[0] , qsl[1] ) ;
+    return;
+    }
 
-    int index = Book_List.indexOf(TheBook) ; //finds where is the book with this name and writer
 
-    return index ;
+int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
+QString Gunre_ToAdd = this ->ui ->Gunre_Add_combo -> currentText() ;
+QString Gunre_ToRem = this ->ui ->Gunre_rem_combo -> currentText() ;
+
+
+if( Gunre_ToAdd != "None")
+    if( ! Book_List[book_index].Gunre.contains(Gunre_ToAdd))
+        Book_List[book_index].Gunre.append(Gunre_ToAdd)    ;
+
+
+if(Gunre_ToRem != "None")
+{
+    int Gunre_ToRem_index  = Book_List[book_index].Gunre.indexOf(Gunre_ToRem) ;
+    Book_List[book_index].Gunre.removeAt( Gunre_ToRem_index ) ;
 }
 
-
+}
 
 

@@ -46,6 +46,8 @@ private slots:
 
     void on_Edit_button_clicked();
 
+    void on_Gunre_commit_button_clicked();
+
 private:
     Ui::AdminPage *ui;
 };
