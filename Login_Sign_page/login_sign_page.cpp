@@ -5,6 +5,7 @@
 #include <QTextStream>
 #include <User.h>
 
+#include <Admin_page/adminpage.h>
 
 //==================================forward declares
 template <typename T >
@@ -28,6 +29,7 @@ Login_Sign_page::Login_Sign_page(QWidget *parent) :
     this->ui->SignUp_Widget->hide() ;
 }
 
+
 Login_Sign_page::~Login_Sign_page()
 {
     Save_List_To_File <User> (Users_list  , ".//UsersFile//Users.txt")  ;
@@ -35,7 +37,7 @@ Login_Sign_page::~Login_Sign_page()
     delete ui;   
 }
 
-//===============================================SLOTs :
+//=======================================================SLOTs :
 
 void Login_Sign_page::on_SignUp_Bottom_clicked()
 {
@@ -84,10 +86,19 @@ User tmpUser(UserName ,Pass ) ;
         this->ui->Output->setText("please fill all forms") ;
 
     else if  (Admins_list.contains(tmpUser))
+        {
+   //     AdminPage * ap ;
+   //     ap = new AdminPage   ;
+   //     ap->show() ;
+   //     this->close() ;
+   //     this->~Login_Sign_page() ;
         this->ui->Output->setText("Going to admin page") ;
+        }
 
     else if (Users_list.contains(tmpUser))
+        {
         this->ui->Output->setText("going to user page") ;
+        }
     else
         this->ui->Output->setText("Such Username Doesnt Exist") ;
 

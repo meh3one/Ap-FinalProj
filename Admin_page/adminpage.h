@@ -54,6 +54,7 @@ private slots:
 
 private:
     Ui::AdminPage *ui;
+
 };
 
 #endif // ADMINPAGE_H

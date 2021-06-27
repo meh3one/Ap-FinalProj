@@ -280,6 +280,9 @@ bool Book_be_shown(Book & x  , QString & Search_input )
 if (x.getBookFileName().toLower().contains(Search_input.toLower()))
     return true;
 
+if(x.getPublisher().toLower().contains(Search_input.toLower()))
+    return true;
+
 for(auto g : x.Gunre)
      if( g.toLower().contains(Search_input.toLower()) )
          return true;
@@ -336,12 +339,12 @@ if( Name=="" || Pass=="" )
     return;
     }
 
-User tmpUser(Name ,Pass) ;
+User tmpUser(Name , Pass) ;
 
 if(! Users_list.contains(tmpUser))
     {
-    this-> ui -> BookEdit_output ->setVisible(true) ;
-    this-> ui -> BookEdit_output ->setText("User Name OR PassWord is incorret") ;
+    this -> ui -> BookEdit_output ->setVisible(true) ;
+    this -> ui -> BookEdit_output ->setText("User Name OR PassWord is incorret") ;
     return;
     }
 
@@ -356,5 +359,7 @@ int book_index   = FindBook_Index(Last_clicked_item , Book_List) ;
     Book_List[book_index].setAvailableCopies( coppies -- ) ; //keep the count of Books
 
 
-
+this->ui->Retreve_combo ->clear() ;     // Updating the Users Who Have Lended the Book
+    for( auto x : Book_List[book_index].ListOfLended)
+        this->ui ->Retreve_combo->addItem(x) ;
 }

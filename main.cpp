@@ -13,11 +13,11 @@ int main(int argc, char *argv[])
     _mkdir(".\\BookFile") ;
     _mkdir(".\\UsersFile") ;
 
-//    Login_Sign_page w;
-//    w.show();
+    Login_Sign_page w;
+    w.show();
 
-    AdminPage ap ;
-    ap.show() ;
+//    AdminPage ap ;
+//    ap.show() ;
 
     return a.exec();
 }
