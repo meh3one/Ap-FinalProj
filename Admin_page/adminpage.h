@@ -59,6 +59,8 @@ private slots:
 
     void on_Lend_botton_clicked();
 
+    void on_retrevebotton_clicked();
+
 private:
     Ui::AdminPage *ui;
 

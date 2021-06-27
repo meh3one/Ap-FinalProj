@@ -10,7 +10,7 @@ void Save_File_to_List(QList<T> & List , QString FileAddress) ;
 template <typename T >
 void Save_List_To_File(QList<T> & List , QString FileAddress) ;
 
-int FindBook_Index(QListWidgetItem *item ,QList<Book> * Book_List ) ;
+int  FindBook_Index(QListWidgetItem *item ,QList<Book> * Book_List ) ;
 
 bool Book_be_shown(Book & x  , QString & Search_input ) ;
 
@@ -36,10 +36,6 @@ HideAll()     ;
 
 AdminPage::~AdminPage()
 {
-//    Save_List_To_File <User> (*Users_list  , ".//UsersFile//Users.txt")  ;
-//    Save_List_To_File <User> (*Admins_list , ".//UsersFile//Admins.txt") ;
-//    Save_List_To_File <Book> (*Book_List   , ".//BookFile//BookData.txt") ;
-
     delete ui;
 }
 
@@ -198,13 +194,12 @@ this->ui->Gunre_rem_combo->clear() ;
 void AdminPage::on_Gunre_commit_button_clicked()
 {
 
-    if ( ! this->ui->Gunre_admit_ratio->isChecked())
+if ( ! this->ui->Gunre_admit_ratio->isChecked())
     {
     this->ui->EditGunre_output->setVisible(true) ;
     this->ui->EditGunre_output->setText("Click the Ratio") ;
     return;
     }
-
 
 int book_index      = FindBook_Index(Last_clicked_item , Book_List) ;
 QString Gunre_ToAdd = this ->ui ->Gunre_Add_combo -> currentText() ;
@@ -245,7 +240,6 @@ RefreshList() ;
 }
 
 //============================================Other Functions
-
 template <typename T >
 void Save_File_to_List(QList<T> & List , QString FileAddress)
 {
@@ -260,7 +254,6 @@ QFile File (FileAddress) ;  //oppen file
         }
 }
 
-
 template <typename T >
 void Save_List_To_File(QList<T> & List , QString FileAddress)
 {
@@ -274,7 +267,6 @@ void Save_List_To_File(QList<T> & List , QString FileAddress)
         File.close() ;
 
 }
-
 
 void AdminPage::HideAll()
 {
@@ -323,48 +315,61 @@ for(auto g : x.Gunre)
 return false;
 }
 
-
 //==================================================
-
-
-
-
 
 
 
 void AdminPage::on_Lend_botton_clicked()
 {
-QString Name = this -> ui ->lend_name_input ->text() ;
-QString Pass = this -> ui ->Lend_pass_lable ->text() ;
+QString lendName = this -> ui -> lend_name_input ->text() ;
+QString lendPass = this -> ui ->Lend_pass_input -> text() ;
 
-if( Name=="" || Pass=="" )
+
+
+if(lendName==""  || lendPass =="")
     {
-    this-> ui -> BookEdit_output ->setVisible(true) ;
-    this-> ui -> BookEdit_output ->setText("Enter the Users Name And pass") ;
+    this->ui-> BookEdit_output   ->setText("Please fill all forms") ;
     return;
     }
 
-User tmpUser(Name , Pass) ;
+User tmpUser (lendName ,lendPass) ;
 
-if(! (*Users_list).contains(tmpUser))
+
+if( ! (*Users_list).contains(tmpUser) )
     {
-    this -> ui -> BookEdit_output ->setVisible(true) ;
-    this -> ui -> BookEdit_output ->setText("User Name OR PassWord is incorret") ;
+    this->ui-> BookEdit_output   ->setText("this User doesnt exist") ;
     return;
     }
 
-//int TheUserIndex = Users_list.indexOf(tmpUser) ;          //finding the User
+int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
 
-int book_index   = FindBook_Index(Last_clicked_item , Book_List) ;
+(*Book_List)[book_index] .ListOfLended .append(lendName) ;
 
-    (*Book_List)[book_index].ListOfLended.append(Name) ;
+this->ui->lend_name_input->setText("") ;
+this->ui->Lend_pass_input->setText("") ;
 
-    int coppies = (*Book_List)[book_index].getAvailableCopies() ;
-
-    (*Book_List)[book_index].setAvailableCopies( coppies -- ) ; //keep the count of Books
-
+this->ui->BookEdit_output ->setText("the " +(*Book_List)[book_index].getBookName() + " was lended To "+ lendName ) ;
 
 this->ui->Retreve_combo ->clear() ;     // Updating the Users Who Have Lended the Book
     for( auto x : (*Book_List)[book_index].ListOfLended)
         this->ui ->Retreve_combo->addItem(x) ;
+
+}
+
+void AdminPage::on_retrevebotton_clicked()
+{
+QString Retriver =this->ui->Retreve_combo->currentText() ;
+
+int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
+
+
+int retriver_index = (*Book_List)[book_index].ListOfLended.indexOf(Retriver) ;
+
+(*Book_List)[book_index].ListOfLended.removeAt(retriver_index) ;
+
+this->ui->Retreve_combo ->clear() ;     // Updating the Users Who Have Lended the Book
+    for( auto x : (*Book_List)[book_index].ListOfLended)
+        this->ui ->Retreve_combo->addItem(x) ;
+
+this->ui->BookEdit_output ->setText("the " +(*Book_List)[book_index].getBookName() + " was retrived from "+ Retriver ) ;
 }
