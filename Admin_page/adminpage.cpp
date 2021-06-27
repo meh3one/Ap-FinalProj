@@ -141,6 +141,13 @@ void AdminPage::on_BookList_Widget_output_itemDoubleClicked(QListWidgetItem *ite
 Last_clicked_item = item ;
 item =nullptr ;
 
+int TheBook_index = FindBook_Index( Last_clicked_item , Book_List) ;
+
+this->ui->Retreve_combo ->clear() ;     // Updating the Users Who Have Lended the Book
+    for( auto x : Book_List[TheBook_index].ListOfLended)
+        this->ui ->Retreve_combo->addItem(x) ;
+
+
 HideAll()     ;
 
 this->ui->Edit_name_lable -> setText( Last_clicked_item -> text()) ;
@@ -148,7 +155,6 @@ this->ui->Edit_name_lable -> setText( Last_clicked_item -> text()) ;
 this->ui->BookEdit_Widget->setVisible (true) ;
 
 }
-
 
 void AdminPage::on_Deletethebook_clicked()
 {
@@ -170,8 +176,9 @@ void AdminPage::on_Edit_button_clicked()
 {
 int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
 
-    this ->ui ->BookEdit_Widget ->setVisible(false) ;
-    this ->ui ->Edit_gunre_Widget->setVisible(true) ;
+    this ->ui ->BookEdit_Widget ->setVisible (false) ;
+    this ->ui ->EditGunre_output ->setVisible(false) ;
+    this ->ui ->Edit_gunre_Widget->setVisible(true)  ;
     this ->ui ->Gunre_name_lable->setText(Last_clicked_item->text()) ;
 
 
@@ -191,7 +198,8 @@ void AdminPage::on_Gunre_commit_button_clicked()
 
     if ( ! this->ui->Gunre_admit_ratio->isChecked())
     {
-
+    this->ui->EditGunre_output->setVisible(true) ;
+    this->ui->EditGunre_output->setText("Click the Ratio") ;
     return;
     }
 
@@ -200,17 +208,31 @@ int book_index      = FindBook_Index(Last_clicked_item ,Book_List) ;
 QString Gunre_ToAdd = this ->ui ->Gunre_Add_combo -> currentText() ;
 QString Gunre_ToRem = this ->ui ->Gunre_rem_combo -> currentText() ;
 
+QString out = "" ;
 
 if( Gunre_ToAdd != "None")
     if( ! Book_List[book_index].Gunre.contains(Gunre_ToAdd))
+        {
         Book_List[book_index].Gunre.append(Gunre_ToAdd)    ;
-
+        out = out + "added Gunre : " + Gunre_ToAdd +"\n" ;
+        }
 
 if(Gunre_ToRem != "None")
-{
+    {
     int Gunre_ToRem_index  = Book_List[book_index].Gunre.indexOf(Gunre_ToRem) ;
     Book_List[book_index].Gunre.removeAt( Gunre_ToRem_index ) ;
-}
+    out = out + "removed Gunre : " + Gunre_ToRem +"\n" ;
+    }
+
+
+this->ui-> EditGunre_output->setText(out) ;
+this->ui-> Gunre_admit_ratio->setChecked(false) ;
+
+//reset the List
+this->ui->Gunre_rem_combo->clear() ;
+    this->ui->Gunre_rem_combo ->addItem("None") ;
+        for(auto x : Book_List[book_index].Gunre)
+            this->ui->Gunre_rem_combo ->addItem(x) ;
 
 }
 
@@ -301,3 +323,38 @@ void Save_List_To_File(QList<T> & List , QString FileAddress)
 
 
 
+
+void AdminPage::on_Lend_botton_clicked()
+{
+QString Name = this -> ui ->lend_name_input ->text() ;
+QString Pass = this -> ui ->Lend_pass_lable ->text() ;
+
+if( Name=="" || Pass=="" )
+    {
+    this-> ui -> BookEdit_output ->setVisible(true) ;
+    this-> ui -> BookEdit_output ->setText("Enter the Users Name And pass") ;
+    return;
+    }
+
+User tmpUser(Name ,Pass) ;
+
+if(! Users_list.contains(tmpUser))
+    {
+    this-> ui -> BookEdit_output ->setVisible(true) ;
+    this-> ui -> BookEdit_output ->setText("User Name OR PassWord is incorret") ;
+    return;
+    }
+
+//int TheUserIndex = Users_list.indexOf(tmpUser) ;          //finding the User
+
+int book_index   = FindBook_Index(Last_clicked_item , Book_List) ;
+
+    Book_List[book_index].ListOfLended.append(Name) ;
+
+    int coppies = Book_List[book_index].getAvailableCopies() ;
+
+    Book_List[book_index].setAvailableCopies( coppies -- ) ; //keep the count of Books
+
+
+
+}

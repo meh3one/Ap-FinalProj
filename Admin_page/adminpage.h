@@ -50,6 +50,8 @@ private slots:
 
     void on_Search_bar_input_textChanged(const QString &arg1);
 
+    void on_Lend_botton_clicked();
+
 private:
     Ui::AdminPage *ui;
 };
