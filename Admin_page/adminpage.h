@@ -7,7 +7,11 @@
 #include <Book.h>
 
 #include <QListWidgetItem>
+#include <QList>
 
+
+
+//==========================
 namespace Ui {
 class AdminPage;
 }
@@ -17,15 +21,18 @@ class AdminPage : public QMainWindow
     Q_OBJECT
 
 public:
-    QList<User>  Users_list   ;
-    QList<User>  Admins_list  ;
-    QList<Book>  Book_List    ;
+    QList<User>  * Users_list   ;
+    QList<User>  * Admins_list  ;
+    QList<Book>  * Book_List    ;
 
     QListWidgetItem * Last_clicked_item ;
-
     QString Search_input ;
+
+    QWidget  * LSpage ;
+
     explicit
-    AdminPage(QWidget *parent = nullptr);
+    AdminPage(QWidget *parent = nullptr , QWidget *LSpage=nullptr ,QList<User>  * Users_list =nullptr,
+                                        QList<User>  * Admins_list = nullptr,QList<Book>  * Book_List  =nullptr);
 
     ~AdminPage()       ;
 

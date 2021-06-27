@@ -10,19 +10,21 @@ void Save_File_to_List(QList<T> & List , QString FileAddress) ;
 template <typename T >
 void Save_List_To_File(QList<T> & List , QString FileAddress) ;
 
-int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List ) ;
+int FindBook_Index(QListWidgetItem *item ,QList<Book> * Book_List ) ;
 
 bool Book_be_shown(Book & x  , QString & Search_input ) ;
 
 //===========================================Constractor
-AdminPage::AdminPage(QWidget *parent) :
+AdminPage::AdminPage(QWidget *parent , QWidget *LSpage ,QList<User>  * Users_list ,
+                     QList<User>  * Admins_list ,QList<Book>  * Book_List  ) :
     QMainWindow(parent),
     ui(new Ui::AdminPage)
 {
-Save_File_to_List <User> (Users_list  , ".//UsersFile//Users.txt")   ;
-Save_File_to_List <User> (Admins_list , ".//UsersFile//Admins.txt")  ;
-Save_File_to_List <Book> (Book_List   , ".//BookFile//BookData.txt") ;
 
+this ->Book_List   = Book_List   ;
+this ->Users_list  = Users_list  ;
+this ->Admins_list = Admins_list ;
+this ->LSpage      = LSpage      ;
 
     ui->setupUi(this);
 
@@ -34,9 +36,9 @@ HideAll()     ;
 
 AdminPage::~AdminPage()
 {
-    Save_List_To_File <User> (Users_list  , ".//UsersFile//Users.txt")   ;
-    Save_List_To_File <User> (Admins_list , ".//UsersFile//Admins.txt")  ;
-    Save_List_To_File <Book> (Book_List   , ".//BookFile//BookData.txt") ;
+//    Save_List_To_File <User> (*Users_list  , ".//UsersFile//Users.txt")  ;
+//    Save_List_To_File <User> (*Admins_list , ".//UsersFile//Admins.txt") ;
+//    Save_List_To_File <Book> (*Book_List   , ".//BookFile//BookData.txt") ;
 
     delete ui;
 }
@@ -76,14 +78,14 @@ QString Text = this->ui->AddBook_DigCoppy->toPlainText() ;
 
     Book NewBook(BookName , Writer , Publisher, AvailableCopies.toInt()) ;
 
-    if(Book_List.contains(NewBook))
+    if(Book_List->contains(NewBook))
         {
         this->ui->AddBook__output->setText("The Book Alredy exist") ;
         return;
         }
     else
         {
-        Book_List.append(NewBook) ;
+        Book_List->append(NewBook) ;
 
         this->ui->AddBook__output->setText("Book was added") ;
 
@@ -103,7 +105,7 @@ void AdminPage::on_BookList_Widget_output_itemClicked(QListWidgetItem * item)
 {    
 Last_clicked_item =item ;
 item=nullptr ;
-Book TheBook = Book_List[ FindBook_Index( Last_clicked_item , Book_List) ] ;
+Book TheBook = (*Book_List)[ FindBook_Index( Last_clicked_item , Book_List) ] ;
 Last_clicked_item = nullptr ;
 
 this->ui->Read_Name_lable     -> setText("BookName  :  " + TheBook.getBookName ())  ;
@@ -144,7 +146,7 @@ item =nullptr ;
 int TheBook_index = FindBook_Index( Last_clicked_item , Book_List) ;
 
 this->ui->Retreve_combo ->clear() ;     // Updating the Users Who Have Lended the Book
-    for( auto x : Book_List[TheBook_index].ListOfLended)
+    for( auto x : (*Book_List)[TheBook_index].ListOfLended)
         this->ui ->Retreve_combo->addItem(x) ;
 
 
@@ -162,9 +164,9 @@ void AdminPage::on_Deletethebook_clicked()
 int TheBook_index = FindBook_Index( Last_clicked_item , Book_List) ;
 Last_clicked_item = nullptr ;
 
-QFile :: remove(".//BookFile//" + Book_List.at(TheBook_index).getBookFileName()) ;
+QFile :: remove(".//BookFile//" + (*Book_List).at(TheBook_index).getBookFileName()) ;
 
-Book_List.removeAt( TheBook_index ) ;
+Book_List->removeAt( TheBook_index ) ;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Print that the book was deleted
 
@@ -186,7 +188,7 @@ int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
 
 this->ui->Gunre_rem_combo->clear() ;
     this->ui->Gunre_rem_combo ->addItem("None") ;
-        for(auto x : Book_List[book_index].Gunre)
+        for(auto x : (*Book_List)[book_index].Gunre)
             this->ui->Gunre_rem_combo ->addItem(x) ;
 
 
@@ -204,23 +206,23 @@ void AdminPage::on_Gunre_commit_button_clicked()
     }
 
 
-int book_index      = FindBook_Index(Last_clicked_item ,Book_List) ;
+int book_index      = FindBook_Index(Last_clicked_item , Book_List) ;
 QString Gunre_ToAdd = this ->ui ->Gunre_Add_combo -> currentText() ;
 QString Gunre_ToRem = this ->ui ->Gunre_rem_combo -> currentText() ;
 
 QString out = "" ;
 
 if( Gunre_ToAdd != "None")
-    if( ! Book_List[book_index].Gunre.contains(Gunre_ToAdd))
+    if( ! (*Book_List)[book_index].Gunre.contains(Gunre_ToAdd))
         {
-        Book_List[book_index].Gunre.append(Gunre_ToAdd)    ;
+        (*Book_List)[book_index].Gunre.append(Gunre_ToAdd)    ;
         out = out + "added Gunre : " + Gunre_ToAdd +"\n" ;
         }
 
 if(Gunre_ToRem != "None")
     {
-    int Gunre_ToRem_index  = Book_List[book_index].Gunre.indexOf(Gunre_ToRem) ;
-    Book_List[book_index].Gunre.removeAt( Gunre_ToRem_index ) ;
+    int Gunre_ToRem_index  = (*Book_List)[book_index].Gunre.indexOf(Gunre_ToRem) ;
+    (*Book_List)[book_index].Gunre.removeAt( Gunre_ToRem_index ) ;
     out = out + "removed Gunre : " + Gunre_ToRem +"\n" ;
     }
 
@@ -231,7 +233,7 @@ this->ui-> Gunre_admit_ratio->setChecked(false) ;
 //reset the List
 this->ui->Gunre_rem_combo->clear() ;
     this->ui->Gunre_rem_combo ->addItem("None") ;
-        for(auto x : Book_List[book_index].Gunre)
+        for(auto x : (*Book_List)[book_index].Gunre)
             this->ui->Gunre_rem_combo ->addItem(x) ;
 
 }
@@ -243,52 +245,6 @@ RefreshList() ;
 }
 
 //============================================Other Functions
-void AdminPage::HideAll()
-{
-
-this->ui->AddBook_Widget->setVisible (false)   ;
-this->ui->BookEdit_Widget->setVisible(false)   ;
-this->ui->Read_widget ->setVisible   (false)   ;
-this->ui->Edit_gunre_Widget->setVisible(false) ;
-
-//one object must be seted visible after this function
-}
-
-void AdminPage::RefreshList()
-{
-ui->BookList_Widget_output->clear() ;                        //UpDates The List of Books
-for(auto x : Book_List)
-    {
-    if( Book_be_shown(x , Search_input) )
-        this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
-    }
-}
-
-int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List )
-{
-
-    QStringList qsl = item ->text().split('-') ;
-    Book TheBook(qsl[0] , qsl[1] ) ;
-
-    int index = Book_List.indexOf(TheBook) ; //finds where is the book with this name and writer
-
-    return index ;
-}
-
-bool Book_be_shown(Book & x  , QString & Search_input )
-{
-if (x.getBookFileName().toLower().contains(Search_input.toLower()))
-    return true;
-
-if(x.getPublisher().toLower().contains(Search_input.toLower()))
-    return true;
-
-for(auto g : x.Gunre)
-     if( g.toLower().contains(Search_input.toLower()) )
-         return true;
-
-return false;
-}
 
 template <typename T >
 void Save_File_to_List(QList<T> & List , QString FileAddress)
@@ -319,6 +275,55 @@ void Save_List_To_File(QList<T> & List , QString FileAddress)
 
 }
 
+
+void AdminPage::HideAll()
+{
+
+this->ui->AddBook_Widget->setVisible (false)   ;
+this->ui->BookEdit_Widget->setVisible(false)   ;
+this->ui->Read_widget ->setVisible   (false)   ;
+this->ui->Edit_gunre_Widget->setVisible(false) ;
+
+//one object must be seted visible after this function
+}
+
+void AdminPage::RefreshList()
+{
+ui->BookList_Widget_output->clear() ;                        //UpDates The List of Books
+for(auto x : *Book_List)
+    {
+    if( Book_be_shown(x , Search_input) )
+        this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
+    }
+}
+
+int FindBook_Index(QListWidgetItem *item ,QList<Book> * Book_List )
+{
+
+    QStringList qsl = item ->text().split('-') ;
+    Book TheBook(qsl[0] , qsl[1] ) ;
+
+    int index = Book_List->indexOf(TheBook) ; //finds where is the book with this name and writer
+
+    return index ;
+}
+
+bool Book_be_shown(Book & x  , QString & Search_input )
+{
+if (x.getBookFileName().toLower().contains(Search_input.toLower()))
+    return true;
+
+if(x.getPublisher().toLower().contains(Search_input.toLower()))
+    return true;
+
+for(auto g : x.Gunre)
+     if( g.toLower().contains(Search_input.toLower()) )
+         return true;
+
+return false;
+}
+
+
 //==================================================
 
 
@@ -341,7 +346,7 @@ if( Name=="" || Pass=="" )
 
 User tmpUser(Name , Pass) ;
 
-if(! Users_list.contains(tmpUser))
+if(! (*Users_list).contains(tmpUser))
     {
     this -> ui -> BookEdit_output ->setVisible(true) ;
     this -> ui -> BookEdit_output ->setText("User Name OR PassWord is incorret") ;
@@ -352,14 +357,14 @@ if(! Users_list.contains(tmpUser))
 
 int book_index   = FindBook_Index(Last_clicked_item , Book_List) ;
 
-    Book_List[book_index].ListOfLended.append(Name) ;
+    (*Book_List)[book_index].ListOfLended.append(Name) ;
 
-    int coppies = Book_List[book_index].getAvailableCopies() ;
+    int coppies = (*Book_List)[book_index].getAvailableCopies() ;
 
-    Book_List[book_index].setAvailableCopies( coppies -- ) ; //keep the count of Books
+    (*Book_List)[book_index].setAvailableCopies( coppies -- ) ; //keep the count of Books
 
 
 this->ui->Retreve_combo ->clear() ;     // Updating the Users Who Have Lended the Book
-    for( auto x : Book_List[book_index].ListOfLended)
+    for( auto x : (*Book_List)[book_index].ListOfLended)
         this->ui ->Retreve_combo->addItem(x) ;
 }

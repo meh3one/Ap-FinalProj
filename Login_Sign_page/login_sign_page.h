@@ -5,7 +5,11 @@
 #include <QFile>
 
 #include "User.h"
+#include <Book.h>
 
+#include <Admin_page/adminpage.h>
+
+//======================
 namespace Ui {
 class Login_Sign_page;
 }
@@ -15,8 +19,11 @@ class Login_Sign_page : public QMainWindow
     Q_OBJECT
 
 public:
-    QList<User>  Users_list  ;
-    QList<User> Admins_list ;
+    QList<User>   Users_list  ;
+    QList<User>   Admins_list ;
+    QList<Book>   Book_List    ;
+
+    AdminPage * Adpage ;
 
     explicit Login_Sign_page(QWidget *parent = nullptr);
     ~Login_Sign_page();
@@ -33,6 +40,7 @@ private slots:
 
 private:
     Ui::Login_Sign_page *ui;
+
 };
 
 #endif // LOGIN_SIGN_PAGE_H

@@ -22,8 +22,13 @@ Login_Sign_page::Login_Sign_page(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Login_Sign_page)
 {
-    Save_File_to_List <User> (Users_list  , ".//UsersFile//Users.txt")  ;
-    Save_File_to_List <User> (Admins_list , ".//UsersFile//Admins.txt") ;
+
+    Save_File_to_List <User> (Users_list  , ".//UsersFile//Users.txt"  ) ;
+    Save_File_to_List <User> (Admins_list , ".//UsersFile//Admins.txt" ) ;
+    Save_File_to_List <Book> (Book_List   , ".//BookFile//BookData.txt") ;
+
+
+    this->Adpage = new AdminPage(0 , this ,& Users_list ,& Admins_list ,& Book_List) ;
 
     ui->setupUi(this);
     this->ui->SignUp_Widget->hide() ;
@@ -34,6 +39,7 @@ Login_Sign_page::~Login_Sign_page()
 {
     Save_List_To_File <User> (Users_list  , ".//UsersFile//Users.txt")  ;
     Save_List_To_File <User> (Admins_list , ".//UsersFile//Admins.txt") ;
+    Save_List_To_File <Book> (Book_List   , ".//BookFile//BookData.txt") ;
     delete ui;   
 }
 
@@ -87,12 +93,8 @@ User tmpUser(UserName ,Pass ) ;
 
     else if  (Admins_list.contains(tmpUser))
         {
-   //     AdminPage * ap ;
-   //     ap = new AdminPage   ;
-   //     ap->show() ;
-   //     this->close() ;
-   //     this->~Login_Sign_page() ;
-        this->ui->Output->setText("Going to admin page") ;
+        this->hide()    ;
+        this->Adpage->show() ;
         }
 
     else if (Users_list.contains(tmpUser))
