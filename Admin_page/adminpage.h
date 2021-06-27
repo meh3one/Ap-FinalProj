@@ -23,6 +23,7 @@ public:
 
     QListWidgetItem * Last_clicked_item ;
 
+    QString Search_input ;
     explicit
     AdminPage(QWidget *parent = nullptr);
 
@@ -41,12 +42,13 @@ private slots:
 
     void on_Deletethebook_clicked();
 
-
     void on_AddBook_widget_botton_clicked();
 
     void on_Edit_button_clicked();
 
     void on_Gunre_commit_button_clicked();
+
+    void on_Search_bar_input_textChanged(const QString &arg1);
 
 private:
     Ui::AdminPage *ui;

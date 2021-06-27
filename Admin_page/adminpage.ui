@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>991</width>
+    <height>633</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QWidget" name="BookEdit_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>10</y>
+      <x>170</x>
+      <y>0</y>
       <width>221</width>
       <height>221</height>
      </rect>
@@ -107,8 +107,8 @@
    <widget class="QWidget" name="Read_widget" native="true">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>190</y>
+      <x>280</x>
+      <y>260</y>
       <width>311</width>
       <height>191</height>
      </rect>
@@ -157,10 +157,10 @@
    <widget class="QWidget" name="AddBook_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>0</y>
+      <x>430</x>
+      <y>10</y>
       <width>291</width>
-      <height>181</height>
+      <height>201</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -222,7 +222,7 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>50</y>
       <width>160</width>
       <height>361</height>
@@ -230,21 +230,24 @@
     </property>
     <layout class="QVBoxLayout" name="leftsidebar">
      <item>
+      <widget class="QLineEdit" name="Search_bar_input"/>
+     </item>
+     <item>
+      <widget class="QListWidget" name="BookList_Widget_output"/>
+     </item>
+     <item>
       <widget class="QPushButton" name="AddBook_widget_botton">
        <property name="text">
         <string>AddBook</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QListWidget" name="BookList_Widget_output"/>
-     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="Edit_gunre_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>760</x>
       <y>250</y>
       <width>191</width>
       <height>181</height>
@@ -432,32 +435,6 @@
       </widget>
      </item>
     </layout>
-   </widget>
-   <widget class="QLabel" name="labe_1l">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>460</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>460</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
    </widget>
   </widget>
  </widget>

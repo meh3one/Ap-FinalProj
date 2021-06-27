@@ -12,6 +12,8 @@ void Save_List_To_File(QList<T> & List , QString FileAddress) ;
 
 int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List ) ;
 
+bool Book_be_shown(Book & x  , QString & Search_input ) ;
+
 //===========================================Constractor
 AdminPage::AdminPage(QWidget *parent) :
     QMainWindow(parent),
@@ -164,12 +166,11 @@ RefreshList() ;
 HideAll() ;
 }
 
-
 void AdminPage::on_Edit_button_clicked()
 {
 int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
 
-
+    this ->ui ->BookEdit_Widget ->setVisible(false) ;
     this ->ui ->Edit_gunre_Widget->setVisible(true) ;
     this ->ui ->Gunre_name_lable->setText(Last_clicked_item->text()) ;
 
@@ -183,6 +184,40 @@ this->ui->Gunre_rem_combo->clear() ;
 
 
 
+}
+
+void AdminPage::on_Gunre_commit_button_clicked()
+{
+
+    if ( ! this->ui->Gunre_admit_ratio->isChecked())
+    {
+
+    return;
+    }
+
+
+int book_index      = FindBook_Index(Last_clicked_item ,Book_List) ;
+QString Gunre_ToAdd = this ->ui ->Gunre_Add_combo -> currentText() ;
+QString Gunre_ToRem = this ->ui ->Gunre_rem_combo -> currentText() ;
+
+
+if( Gunre_ToAdd != "None")
+    if( ! Book_List[book_index].Gunre.contains(Gunre_ToAdd))
+        Book_List[book_index].Gunre.append(Gunre_ToAdd)    ;
+
+
+if(Gunre_ToRem != "None")
+{
+    int Gunre_ToRem_index  = Book_List[book_index].Gunre.indexOf(Gunre_ToRem) ;
+    Book_List[book_index].Gunre.removeAt( Gunre_ToRem_index ) ;
+}
+
+}
+
+void AdminPage::on_Search_bar_input_textChanged(const QString &arg1)
+{
+Search_input = arg1 ;
+RefreshList() ;
 }
 
 //============================================Other Functions
@@ -201,8 +236,10 @@ void AdminPage::RefreshList()
 {
 ui->BookList_Widget_output->clear() ;                        //UpDates The List of Books
 for(auto x : Book_List)
-    this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
-
+    {
+    if( Book_be_shown(x , Search_input) )
+        this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
+    }
 }
 
 int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List )
@@ -216,6 +253,17 @@ int FindBook_Index(QListWidgetItem *item ,QList<Book> & Book_List )
     return index ;
 }
 
+bool Book_be_shown(Book & x  , QString & Search_input )
+{
+if (x.getBookFileName().toLower().contains(Search_input.toLower()))
+    return true;
+
+for(auto g : x.Gunre)
+     if( g.toLower().contains(Search_input.toLower()) )
+         return true;
+
+return false;
+}
 
 template <typename T >
 void Save_File_to_List(QList<T> & List , QString FileAddress)
@@ -251,31 +299,5 @@ void Save_List_To_File(QList<T> & List , QString FileAddress)
 
 
 
-void AdminPage::on_Gunre_commit_button_clicked()
-{
-if (! this->ui->Gunre_admit_ratio->isChecked())
-    {
-
-    return;
-    }
-
-
-int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
-QString Gunre_ToAdd = this ->ui ->Gunre_Add_combo -> currentText() ;
-QString Gunre_ToRem = this ->ui ->Gunre_rem_combo -> currentText() ;
-
-
-if( Gunre_ToAdd != "None")
-    if( ! Book_List[book_index].Gunre.contains(Gunre_ToAdd))
-        Book_List[book_index].Gunre.append(Gunre_ToAdd)    ;
-
-
-if(Gunre_ToRem != "None")
-{
-    int Gunre_ToRem_index  = Book_List[book_index].Gunre.indexOf(Gunre_ToRem) ;
-    Book_List[book_index].Gunre.removeAt( Gunre_ToRem_index ) ;
-}
-
-}
 
 
