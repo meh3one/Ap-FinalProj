@@ -30,13 +30,16 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(62, 219, 240,0.9);
+     <string notr="true">background-color: rgba(255, 255, 255,.8) ;
 
 color: rgb(0, 0, 0);</string>
     </property>
     <layout class="QGridLayout" name="loginPage">
-     <item row="1" column="0">
+     <item row="1" column="0" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="PassWord_lable_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255, 0.0);</string>
+       </property>
        <property name="text">
         <string> PassWord</string>
        </property>
@@ -45,7 +48,8 @@ color: rgb(0, 0, 0);</string>
      <item row="4" column="0" colspan="2">
       <widget class="QPushButton" name="Login_To_Sign_button">
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(26, 19, 212)</string>
+        <string notr="true">
+background-color: rgb(38, 154, 255)</string>
        </property>
        <property name="text">
         <string>Dont have an account ? Sign Up</string>
@@ -55,14 +59,15 @@ color: rgb(0, 0, 0);</string>
      <item row="1" column="1">
       <widget class="QLineEdit" name="Login_PassWord_input">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(119, 172, 241)</string>
+        <string notr="true">background-color: rgb(183, 254, 255)</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
       <widget class="QPushButton" name="Login_button">
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(26, 19, 212)</string>
+        <string notr="true">
+background-color: rgb(38, 154, 255)</string>
        </property>
        <property name="text">
         <string>Login</string>
@@ -72,12 +77,15 @@ color: rgb(0, 0, 0);</string>
      <item row="0" column="1">
       <widget class="QLineEdit" name="Login_UserName_input">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(119, 172, 241)</string>
+        <string notr="true">background-color: rgb(183, 254, 255)</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
+     <item row="0" column="0" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="UserName_lable_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255, 0.0);</string>
+       </property>
        <property name="text">
         <string> UserName :</string>
        </property>
@@ -104,102 +112,133 @@ color: rgb(0, 0, 0);</string>
    <widget class="QWidget" name="SignUp_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>40</x>
       <y>130</y>
       <width>230</width>
       <height>250</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255,.7) ;
+     <string notr="true">background-color: rgba(255, 255, 255,.8) ;
 
 color: rgb(0, 0, 0);</string>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
+     <item row="2" column="0" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="PassWord_lable">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255, 0.0);</string>
+       </property>
        <property name="text">
-        <string>PassWord</string>
+        <string>PassWord :</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
       <widget class="QLineEdit" name="Sign_PassWord_input2">
        <property name="styleSheet">
-        <string notr="true">background-color:: rgba(162, 219, 250);
-
-</string>
+        <string notr="true">background-color: rgb(183, 254, 255)</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
       <widget class="QLineEdit" name="Sign_PassWord_input1">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 170, 255)</string>
+        <string notr="true">background-color: rgb(183, 254, 255)</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="Sign_Email_input">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 170, 255)</string>
+        <string notr="true">background-color: rgb(183, 254, 255)</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="1" column="0" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="Email_lable">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255, 0.0);</string>
+       </property>
        <property name="text">
-        <string>Email</string>
+        <string>Email  :</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
+     <item row="0" column="0" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="UserName_lable">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255, 0.0);</string>
+       </property>
        <property name="text">
-        <string>UserName</string>
+        <string>UserName :</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <widget class="QPushButton" name="SignUp_Bottom">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 85, 127);</string>
+        <string notr="true">background-color: rgb(38, 154, 255)</string>
        </property>
        <property name="text">
         <string>Sign Up</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0" colspan="2">
+     <item row="5" column="0" colspan="2">
       <widget class="QRadioButton" name="term_service_ratio">
+       <property name="styleSheet">
+        <string notr="true">
+background-color: rgba(180, 241, 255, 0.2);</string>
+       </property>
        <property name="text">
         <string>Agree to our term and service</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="3" column="0" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="PassWord_lable_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255, 0.0);</string>
+       </property>
        <property name="text">
-        <string>PassWord</string>
+        <string>PassWord:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
       <widget class="QLineEdit" name="Sign_UserName_input">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 170, 255)</string>
+        <string notr="true">background-color: rgb(183, 254, 255)</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="0" colspan="2">
+     <item row="7" column="0" colspan="2">
       <widget class="QPushButton" name="sign_to_login_button">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 85, 127);</string>
+        <string notr="true">
+background-color: rgb(38, 154, 255)</string>
        </property>
        <property name="text">
         <string>Already Have an Account ? Login </string>
        </property>
       </widget>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </widget>
@@ -207,13 +246,13 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>400</y>
+      <y>390</y>
       <width>230</width>
       <height>50</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgba(85, 85, 127, 0.8)</string>
+     <string notr="true">background-color: rgba(255, 255, 255, 0.4);</string>
     </property>
    </widget>
   </widget>

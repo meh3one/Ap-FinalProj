@@ -37,7 +37,8 @@ Login_Sign_page::Login_Sign_page(QWidget *parent) :
     this->ROpage = new ReadOnly_Page(0,this,&Book_List ,&Gunres_List)   ;
 
     ui->setupUi(this);
-    this->ui->SignUp_Widget->hide() ;
+    this->ui->SignUp_Widget->setVisible(false) ;
+    this->ui->Output->setVisible(false)    ;
 }
 
 
@@ -62,21 +63,25 @@ QString Email    =  this->ui->Sign_Email_input->text()     ;
 
 if(UserName =="" || Pass1=="" || pass2=="" ||Email=="" )
     {
+    this->ui->Output->setVisible(true)    ;
     this->ui->Output->setText("Please Fill All Forms ") ;
     return;
     }
 else if( ! this->ui->term_service_ratio->isChecked())
     {
+    this->ui->Output->setVisible(true)    ;
     this->ui->Output->setText("You Have To Agree To Our Terms And servicies") ;
     return;
     }
 else if( UserName_IS_Taken(UserName , Users_list ) )
     {
+    this->ui->Output->setVisible(true)    ;
     this->ui->Output->setText("The Username is Taken ! ") ;
     return;
     }
 else if(Pass1 !=pass2)
     {
+    this->ui->Output->setVisible(true)    ;
     this->ui->Output->setText ("PassWords Dont Match ")  ;
     return;
     }
@@ -97,8 +102,10 @@ QString Pass = this->ui->Login_PassWord_input->text()     ;
 User tmpUser(UserName ,Pass ) ;
 
     if(UserName=="" || Pass=="" )
+        {
+        this->ui->Output->setVisible(true)    ;
         this->ui->Output->setText("please fill all forms") ;
-
+        }
     else if  (Admins_list.contains(tmpUser))
         {
         this->hide()    ;
@@ -111,18 +118,26 @@ User tmpUser(UserName ,Pass ) ;
         this->ROpage->show() ;
         }
     else
+        {
+        this->ui->Output->setVisible(true)    ;
         this->ui->Output->setText("Such Username Doesnt Exist") ;
-
+        }
 }
 
 void Login_Sign_page::on_Login_To_Sign_button_clicked()
 {
-this->ui->Login_Widget->setVisible(0) ;
+this->ui->Output->setText("")   ;
+this->ui->Output->setVisible(false)    ;
+
+this->ui->Login_Widget->setVisible(0)  ;
 this->ui->SignUp_Widget->setVisible(1) ;
 }
 
 void Login_Sign_page::on_sign_to_login_button_clicked()
 {
+this->ui->Output->setText("")   ;
+this->ui->Output->setVisible(false)    ;
+
 this->ui->Login_Widget->setVisible(1) ;
 this->ui->SignUp_Widget->setVisible(0) ;
 }
