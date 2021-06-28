@@ -14,6 +14,8 @@ ReadOnly_Page::ReadOnly_Page( QWidget *parent  , QWidget *LSpage ,
 
     ui->setupUi(this);
 
+
+    HideAll() ;
     RefreshList() ;
 }
 
@@ -76,7 +78,7 @@ RefreshList() ;
 void ReadOnly_Page::on_Gunre_show_button_clicked()
 {
 HideAll() ;
-this->ui->GunreList_widget_output ->setVisible(true) ;
+this->ui->Gunre_output_widget ->setVisible(true) ;
 
 
 this->ui->GunreList_widget_output->clear() ;
@@ -97,9 +99,9 @@ RefreshList() ;
 void ReadOnly_Page::HideAll()
 {
 
+this->ui-> Read_widget         -> setVisible (false) ;
+this->ui-> Gunre_output_widget -> setVisible (false) ;
 
-this->ui->GunreList_widget_output->setVisible(false) ;
-this->ui->Read_widget ->setVisible           (false) ;
 
 //one object must be seted visible after this function
 }
@@ -112,4 +114,11 @@ for(auto x : *Book_List)
     if( Book_be_shown(x , Search_input) )
         this->ui->BookList_Widget_output->addItem( x.getBookName() + "-" + x.getWriter() ) ;
     }
+}
+
+void ReadOnly_Page::on_pushButton_clicked()
+{
+this ->hide() ;
+
+this->LSpage ->show() ;
 }

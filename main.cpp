@@ -1,4 +1,4 @@
-/********************************************************************
+/***********************************************************************
 * Git repository ::
 *
 * special tnx to Mat_Mot && kianmjl  for Guildness
@@ -11,8 +11,9 @@
 *
 * Sources :
 *
-* login page : https://unsplash.com/@matt__feeney
-* Admin Page : https://unsplash.com/@henry_be
+* login page    : https://unsplash.com/@matt__feeney
+* Admin Page    : https://unsplash.com/@henry_be
+* ReadOnly page : https://unsplash.com/@kimberlyfarmer
 *
 ***********************************************************************/
 

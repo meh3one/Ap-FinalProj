@@ -43,6 +43,8 @@ private slots:
 
     void on_BookList_Widget_output_itemClicked(QListWidgetItem * item) ;
 
+    void on_pushButton_clicked();
+
 private:
     Ui::ReadOnly_Page *ui;
 

@@ -14,73 +14,48 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>70</y>
-      <width>160</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="leftsidebar">
-     <item>
-      <widget class="QLineEdit" name="Search_bar_input"/>
-     </item>
-     <item>
-      <widget class="QListWidget" name="BookList_Widget_output"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Gunre_show_button">
-       <property name="text">
-        <string>Groups</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
+   <property name="styleSheet">
+    <string notr="true">#centralwidget
+{
+border-image: url(:/new/prefix1/Pics/ReadOnly_page.jpg);
+}</string>
+   </property>
    <widget class="QWidget" name="Read_widget" native="true">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>160</y>
+      <x>350</x>
+      <y>140</y>
       <width>320</width>
-      <height>200</height>
+      <height>240</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255,.8) ;
+
+color: rgb(0, 0, 0);</string>
     </property>
     <layout class="QGridLayout" name="Read_Widget">
      <item row="2" column="1">
       <widget class="QLabel" name="Read_avalablecopies">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255,.0) ;
+
+</string>
+       </property>
        <property name="text">
         <string>Available coppies</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="Read_lendedCopies_lable">
-       <property name="text">
-        <string>Lended copies :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" colspan="2">
-      <widget class="QLabel" name="Read_Gunre_lable">
-       <property name="text">
-        <string>Gunres :</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="Read_Name_lable">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255,.0) ;
+
+</string>
+       </property>
        <property name="text">
         <string>Book name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="Read_pub_lable">
-       <property name="text">
-        <string>Publisher</string>
        </property>
       </widget>
      </item>
@@ -89,21 +64,125 @@
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="Read_Writer_lable">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255,.0) ;
+
+</string>
+       </property>
        <property name="text">
         <string>Writer</string>
        </property>
       </widget>
      </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="Read_pub_lable">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255,.0) ;
+
+</string>
+       </property>
+       <property name="text">
+        <string>Publisher</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="Read_lendedCopies_lable">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255,.0) ;
+
+</string>
+       </property>
+       <property name="text">
+        <string>Lended copies :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <widget class="QLabel" name="Read_Gunre_lable">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255,.0) ;
+
+</string>
+       </property>
+       <property name="text">
+        <string>Gunres :</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
-   <widget class="QListWidget" name="GunreList_widget_output">
+   <widget class="QWidget" name="verticalWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>110</y>
-      <width>142</width>
-      <height>323</height>
+      <x>10</x>
+      <y>10</y>
+      <width>160</width>
+      <height>571</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255,.8) ;
+
+color: rgb(0, 0, 0);</string>
+    </property>
+    <layout class="QVBoxLayout" name="leftsidebar">
+     <item>
+      <widget class="QLineEdit" name="Search_bar_input">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(183, 254, 255)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="BookList_Widget_output"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Gunre_show_button">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(38, 154, 255)</string>
+       </property>
+       <property name="text">
+        <string>Groups</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="Gunre_output_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>210</y>
+      <width>160</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255,.8) ;
+
+color: rgb(0, 0, 0);</string>
+    </property>
+    <layout class="QVBoxLayout" name="Gunre_widget">
+     <item>
+      <widget class="QListWidget" name="GunreList_widget_output"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>20</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(34, 34, 255);</string>
+    </property>
+    <property name="text">
+     <string>Log Out</string>
     </property>
    </widget>
   </widget>

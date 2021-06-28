@@ -433,3 +433,10 @@ return false;
 }
 
 //==================================================
+
+void AdminPage::on_pushButton_clicked()
+{
+this ->hide() ;
+
+this->LSpage ->show() ;
+}

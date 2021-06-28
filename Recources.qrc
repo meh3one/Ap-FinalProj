@@ -2,5 +2,6 @@
     <qresource prefix="/new/prefix1">
         <file>Pics/login page bg 2.jpg</file>
         <file>Pics/Adminpage_BG.jpg</file>
+        <file>Pics/ReadOnly_page.jpg</file>
     </qresource>
 </RCC>

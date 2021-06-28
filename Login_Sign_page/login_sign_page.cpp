@@ -114,6 +114,7 @@ User tmpUser(UserName ,Pass ) ;
 
     else if (Users_list.contains(tmpUser))
         {
+//        this->ui->Login_PassWord_input->clear() ;
         this->hide()         ;
         this->ROpage->show() ;
         }

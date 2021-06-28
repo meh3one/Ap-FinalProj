@@ -68,6 +68,8 @@ private slots:
 
     void on_GunreList_widget_output_itemClicked(QListWidgetItem *item);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::AdminPage *ui;
 
