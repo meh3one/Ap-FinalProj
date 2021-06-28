@@ -14,6 +14,10 @@ void Save_File_to_List( QList <T> & List , QString FileAddress) ;
 template <typename T >
 void Save_List_To_File( QList <T> & List , QString FileName);
 
+void Gunre_List_To_File (QList<QString> & Gunre) ;
+
+void Gunre_File_to_List(QList<QString> & Gunre) ;
+
 bool UserIsAdmin(QString & name , QList<User> & AdminList) ;
 
 bool UserName_IS_Taken(QString & name , QList<User> & UserList) ;
@@ -26,9 +30,11 @@ Login_Sign_page::Login_Sign_page(QWidget *parent) :
     Save_File_to_List <User> (Users_list  , ".//UsersFile//Users.txt"  ) ;
     Save_File_to_List <User> (Admins_list , ".//UsersFile//Admins.txt" ) ;
     Save_File_to_List <Book> (Book_List   , ".//BookFile//BookData.txt") ;
+    Gunre_File_to_List(Gunres_List) ;
 
 
-    this->Adpage = new AdminPage(0 , this ,& Users_list ,& Admins_list ,& Book_List) ;
+    this->Adpage = new AdminPage(0 , this ,& Users_list ,& Admins_list ,& Book_List , & Gunres_List) ;
+    this->ROpage = new ReadOnly_Page(0,this,&Book_List ,&Gunres_List)   ;
 
     ui->setupUi(this);
     this->ui->SignUp_Widget->hide() ;
@@ -40,6 +46,7 @@ Login_Sign_page::~Login_Sign_page()
     Save_List_To_File <User> (Users_list  , ".//UsersFile//Users.txt")  ;
     Save_List_To_File <User> (Admins_list , ".//UsersFile//Admins.txt") ;
     Save_List_To_File <Book> (Book_List   , ".//BookFile//BookData.txt") ;
+    Gunre_List_To_File (Gunres_List) ;
     delete ui;   
 }
 
@@ -78,7 +85,8 @@ User A(UserName , Pass1 , Email ) ;
 
 Users_list.append(A) ;
 
-//+++++++++++++++++++++++++++++++++++++++++++Go to Read Only mode
+this->hide()    ;
+this->ROpage->show() ;
 }
 
 void Login_Sign_page::on_Login_button_clicked()
@@ -99,7 +107,8 @@ User tmpUser(UserName ,Pass ) ;
 
     else if (Users_list.contains(tmpUser))
         {
-        this->ui->Output->setText("going to user page") ;
+        this->hide()         ;
+        this->ROpage->show() ;
         }
     else
         this->ui->Output->setText("Such Username Doesnt Exist") ;
@@ -137,7 +146,6 @@ bool UserIsAdmin(QString & name , QList<User> & AdminList)
     return false;
 }
 
-
 template <typename T >
 void Save_File_to_List(QList<T> & List , QString FileAddress)
 {
@@ -168,6 +176,37 @@ void Save_List_To_File(QList<T> & List , QString FileAddress)
 }
 
 
+void Gunre_File_to_List(QList<QString> & Gunre)
+{
+QFile File (".//BookFile//Gunres.txt") ;  //oppen file
+    File.open(QFile::Text | QFile::ReadOnly) ;
+    QTextStream qts(&File) ;
+        while(! qts.atEnd())
+        {
+        QString Tmp ;//temporary itrator
+        qts >> Tmp   ;
 
+        if(Tmp != "")
+            Gunre.append(Tmp) ;
+        }
+}
+
+
+void Gunre_List_To_File (QList<QString> & Gunre)
+{
+QFile File (".//BookFile//Gunres.txt") ;  //oppen file
+    File.open(QFile::Text | QFile::WriteOnly) ;
+    QTextStream qts(&File) ;
+
+
+    for(auto x : Gunre)
+        {
+        qts << x  ;
+        qts<<"\n" ;
+        }
+
+    File.close() ;
+
+}
 
 

@@ -16,7 +16,7 @@ bool Book_be_shown(Book & x  , QString & Search_input ) ;
 
 //===========================================Constractor
 AdminPage::AdminPage(QWidget *parent , QWidget *LSpage ,QList<User>  * Users_list ,
-                     QList<User>  * Admins_list ,QList<Book>  * Book_List  ) :
+                     QList<User>  * Admins_list ,QList<Book>  * Book_List  , QList<QString> * Gunres_List  ) :
     QMainWindow(parent),
     ui(new Ui::AdminPage)
 {
@@ -25,6 +25,7 @@ this ->Book_List   = Book_List   ;
 this ->Users_list  = Users_list  ;
 this ->Admins_list = Admins_list ;
 this ->LSpage      = LSpage      ;
+this ->Gunres_List = Gunres_List ;
 
     ui->setupUi(this);
 
@@ -104,10 +105,11 @@ item=nullptr ;
 Book TheBook = (*Book_List)[ FindBook_Index( Last_clicked_item , Book_List) ] ;
 Last_clicked_item = nullptr ;
 
-this->ui->Read_Name_lable     -> setText("BookName  :  " + TheBook.getBookName ())  ;
-this->ui->Read_Writer_lable   -> setText("TheWriter :  " + TheBook.getWriter   ())  ;
-this->ui->Read_pub_lable      -> setText("ThePublisher : "+ TheBook.getPublisher())  ;
-this->ui->Read_avalablecopies -> setText("copies       : " + QString::number ( TheBook.getAvailableCopies())  ) ;
+this->ui->Read_Name_lable         -> setText("BookName  :  " + TheBook.getBookName ())  ;
+this->ui->Read_Writer_lable       -> setText("TheWriter :  " + TheBook.getWriter   ())  ;
+this->ui->Read_pub_lable          -> setText("ThePublisher : "+ TheBook.getPublisher())  ;
+this->ui->Read_avalablecopies     -> setText("copies       : " + QString::number ( TheBook.getAvailableCopies())  ) ;
+this->ui->Read_lendedCopies_lable -> setText("Lended copies: " + QString::number (TheBook.ListOfLended.size  ())  ) ;
 
 QString Gunres ="Gunres : " ;
 
@@ -136,6 +138,7 @@ this->ui->Read_widget ->setVisible(true) ;
 
 void AdminPage::on_BookList_Widget_output_itemDoubleClicked(QListWidgetItem *item)
 {
+this->ui->BookEdit_output  ->clear() ;
 Last_clicked_item = item ;
 item =nullptr ;
 
@@ -187,13 +190,15 @@ this->ui->Gunre_rem_combo->clear() ;
         for(auto x : (*Book_List)[book_index].Gunre)
             this->ui->Gunre_rem_combo ->addItem(x) ;
 
-
+this->ui->Gunre_Add_combo->clear() ;
+    this->ui->Gunre_Add_combo->addItem("None") ;
+        for(auto x : (*Gunres_List) )
+            this->ui->Gunre_Add_combo ->addItem(x) ;
 
 }
 
 void AdminPage::on_Gunre_commit_button_clicked()
 {
-
 if ( ! this->ui->Gunre_admit_ratio->isChecked())
     {
     this->ui->EditGunre_output->setVisible(true) ;
@@ -239,6 +244,99 @@ Search_input = arg1 ;
 RefreshList() ;
 }
 
+void AdminPage::on_Lend_botton_clicked()
+{
+QString lendName = this -> ui -> lend_name_input ->text() ;
+QString lendPass = this -> ui ->Lend_pass_input -> text() ;
+
+
+
+if(lendName==""  || lendPass =="")
+    {
+    this->ui-> BookEdit_output   ->setText("Please fill all forms") ;
+    return;
+    }
+
+User tmpUser (lendName ,lendPass) ;
+
+
+if( ! (*Users_list).contains(tmpUser) )
+    {
+    this->ui-> BookEdit_output   ->setText("this User doesnt exist") ;
+    return;
+    }
+
+int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
+
+(*Book_List)[book_index] .ListOfLended .append(lendName) ;
+
+(*Book_List)[book_index] .setAvailableCopies( (*Book_List)[book_index].getAvailableCopies() - 1) ; // Num available --
+
+this->ui->lend_name_input->setText("") ;
+this->ui->Lend_pass_input->setText("") ;
+
+this->ui->BookEdit_output ->setText("the " +(*Book_List)[book_index].getBookName() + " was lended To "+ lendName ) ;
+
+this->ui->Retreve_combo ->clear() ;                    // Updating the Users Who Have Lended the Book
+    for( auto x : (*Book_List)[book_index].ListOfLended)
+        this->ui ->Retreve_combo->addItem(x) ;
+
+}
+
+void AdminPage::on_retrevebotton_clicked()
+{
+QString Retriver =this->ui->Retreve_combo->currentText() ;
+
+int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
+
+int retriver_index = (*Book_List)[book_index].ListOfLended.indexOf(Retriver) ;
+
+(*Book_List)[book_index].ListOfLended.removeAt(retriver_index) ;
+
+(*Book_List)[book_index] .setAvailableCopies( (*Book_List)[book_index].getAvailableCopies() + 1) ; // Num available ++
+
+this->ui->Retreve_combo ->clear() ;                     // Updating the Users Who Have Lended the Book
+    for( auto x : (*Book_List)[book_index].ListOfLended)
+        this->ui ->Retreve_combo->addItem(x) ;
+
+this->ui->BookEdit_output ->setText("the " +(*Book_List)[book_index].getBookName() + " was retrived from "+ Retriver ) ;
+}
+
+void AdminPage::on_Gunre_show_button_clicked()
+{
+HideAll() ;
+this->ui->Gunre_output_widget ->setVisible(true) ;
+
+
+this->ui->GunreList_widget_output->clear() ;
+    for(auto x : *Gunres_List)
+        this->ui->GunreList_widget_output->addItem(x) ;
+
+}
+
+void AdminPage::on_Add_Gunre_botton_clicked()
+{
+QString GunreName = this ->ui ->Add_Gunre_input ->text() ;
+
+if(GunreName == "")
+    return;
+
+if(  ! (*Gunres_List).contains(GunreName) )
+    Gunres_List->append(GunreName) ;
+
+this->ui->Add_Gunre_input->setText("") ;
+
+this->ui->GunreList_widget_output->clear() ;
+    for(auto x : *Gunres_List)
+        this->ui->GunreList_widget_output->addItem(x) ;
+}
+
+void AdminPage::on_GunreList_widget_output_itemClicked(QListWidgetItem *item)
+{
+this->ui->Search_bar_input->setText(item->text()) ;
+RefreshList() ;
+}
+
 //============================================Other Functions
 template <typename T >
 void Save_File_to_List(QList<T> & List , QString FileAddress)
@@ -275,6 +373,7 @@ this->ui->AddBook_Widget->setVisible (false)   ;
 this->ui->BookEdit_Widget->setVisible(false)   ;
 this->ui->Read_widget ->setVisible   (false)   ;
 this->ui->Edit_gunre_Widget->setVisible(false) ;
+this->ui->Gunre_output_widget->setVisible(false) ;
 
 //one object must be seted visible after this function
 }
@@ -316,60 +415,3 @@ return false;
 }
 
 //==================================================
-
-
-
-void AdminPage::on_Lend_botton_clicked()
-{
-QString lendName = this -> ui -> lend_name_input ->text() ;
-QString lendPass = this -> ui ->Lend_pass_input -> text() ;
-
-
-
-if(lendName==""  || lendPass =="")
-    {
-    this->ui-> BookEdit_output   ->setText("Please fill all forms") ;
-    return;
-    }
-
-User tmpUser (lendName ,lendPass) ;
-
-
-if( ! (*Users_list).contains(tmpUser) )
-    {
-    this->ui-> BookEdit_output   ->setText("this User doesnt exist") ;
-    return;
-    }
-
-int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
-
-(*Book_List)[book_index] .ListOfLended .append(lendName) ;
-
-this->ui->lend_name_input->setText("") ;
-this->ui->Lend_pass_input->setText("") ;
-
-this->ui->BookEdit_output ->setText("the " +(*Book_List)[book_index].getBookName() + " was lended To "+ lendName ) ;
-
-this->ui->Retreve_combo ->clear() ;     // Updating the Users Who Have Lended the Book
-    for( auto x : (*Book_List)[book_index].ListOfLended)
-        this->ui ->Retreve_combo->addItem(x) ;
-
-}
-
-void AdminPage::on_retrevebotton_clicked()
-{
-QString Retriver =this->ui->Retreve_combo->currentText() ;
-
-int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
-
-
-int retriver_index = (*Book_List)[book_index].ListOfLended.indexOf(Retriver) ;
-
-(*Book_List)[book_index].ListOfLended.removeAt(retriver_index) ;
-
-this->ui->Retreve_combo ->clear() ;     // Updating the Users Who Have Lended the Book
-    for( auto x : (*Book_List)[book_index].ListOfLended)
-        this->ui ->Retreve_combo->addItem(x) ;
-
-this->ui->BookEdit_output ->setText("the " +(*Book_List)[book_index].getBookName() + " was retrived from "+ Retriver ) ;
-}

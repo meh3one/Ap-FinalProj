@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ReadOnly_Page</class>
+ <widget class="QMainWindow" name="ReadOnly_Page">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>160</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="leftsidebar">
+     <item>
+      <widget class="QLineEdit" name="Search_bar_input"/>
+     </item>
+     <item>
+      <widget class="QListWidget" name="BookList_Widget_output"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Gunre_show_button">
+       <property name="text">
+        <string>Groups</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="Read_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>160</y>
+      <width>320</width>
+      <height>200</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="Read_Widget">
+     <item row="2" column="1">
+      <widget class="QLabel" name="Read_avalablecopies">
+       <property name="text">
+        <string>Available coppies</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="Read_lendedCopies_lable">
+       <property name="text">
+        <string>Lended copies :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <widget class="QLabel" name="Read_Gunre_lable">
+       <property name="text">
+        <string>Gunres :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="Read_Name_lable">
+       <property name="text">
+        <string>Book name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="Read_pub_lable">
+       <property name="text">
+        <string>Publisher</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QTextBrowser" name="Read__output"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="Read_Writer_lable">
+       <property name="text">
+        <string>Writer</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QListWidget" name="GunreList_widget_output">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>110</y>
+      <width>142</width>
+      <height>323</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

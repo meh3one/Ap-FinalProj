@@ -8,7 +8,7 @@
 #include <Book.h>
 
 #include <Admin_page/adminpage.h>
-
+#include <ReadOnly_page/readonly_page.h>
 //======================
 namespace Ui {
 class Login_Sign_page;
@@ -22,8 +22,10 @@ public:
     QList<User>   Users_list  ;
     QList<User>   Admins_list ;
     QList<Book>   Book_List    ;
+    QStringList   Gunres_List  ;
 
     AdminPage * Adpage ;
+    ReadOnly_Page * ROpage ;
 
     explicit Login_Sign_page(QWidget *parent = nullptr);
     ~Login_Sign_page();

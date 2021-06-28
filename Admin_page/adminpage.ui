@@ -17,8 +17,8 @@
    <widget class="QWidget" name="BookEdit_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>10</y>
+      <x>740</x>
+      <y>20</y>
       <width>230</width>
       <height>250</height>
      </rect>
@@ -163,13 +163,20 @@
    <widget class="QWidget" name="Read_widget" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>260</y>
+      <x>340</x>
+      <y>290</y>
       <width>320</width>
       <height>200</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="Read_Widget">
+     <item row="2" column="1">
+      <widget class="QLabel" name="Read_avalablecopies">
+       <property name="text">
+        <string>Available coppies</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="Read_Name_lable">
        <property name="text">
@@ -177,17 +184,13 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QTextBrowser" name="Read__output"/>
+     </item>
      <item row="2" column="0">
       <widget class="QLabel" name="Read_Writer_lable">
        <property name="text">
         <string>Writer</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="Read_avalablecopies">
-       <property name="text">
-        <string>Available coppies</string>
        </property>
       </widget>
      </item>
@@ -198,13 +201,17 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0" colspan="2">
-      <widget class="QTextBrowser" name="Read__output"/>
-     </item>
-     <item row="3" column="0" colspan="2">
+     <item row="4" column="0" colspan="2">
       <widget class="QLabel" name="Read_Gunre_lable">
        <property name="text">
         <string>Gunres :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="Read_lendedCopies_lable">
+       <property name="text">
+        <string>Lended copies :</string>
        </property>
       </widget>
      </item>
@@ -213,8 +220,8 @@
    <widget class="QWidget" name="AddBook_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>270</y>
+      <x>680</x>
+      <y>280</y>
       <width>361</width>
       <height>201</height>
      </rect>
@@ -278,8 +285,8 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>50</y>
+      <x>0</x>
+      <y>140</y>
       <width>160</width>
       <height>361</height>
      </rect>
@@ -298,13 +305,20 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="Gunre_show_button">
+       <property name="text">
+        <string>Groups</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="Edit_gunre_Widget" native="true">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>10</y>
+      <x>470</x>
+      <y>20</y>
       <width>230</width>
       <height>250</height>
      </rect>
@@ -378,46 +392,6 @@
            <string>None</string>
           </property>
          </item>
-         <item>
-          <property name="text">
-           <string>Horror</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Fantasy</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Religion</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Novel</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Poem</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Psychology</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>New Item</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Love Story</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="0" column="0">
@@ -438,47 +412,7 @@
         <widget class="QComboBox" name="Gunre_Add_combo">
          <item>
           <property name="text">
-           <string>Horror</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>None</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Fantasy</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Religion</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Novel</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Poem</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Psychology</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>New Item</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Love Story</string>
           </property>
          </item>
         </widget>
@@ -511,6 +445,31 @@
         </size>
        </property>
       </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="Gunre_output_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>160</y>
+      <width>160</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="Gunre_widget">
+     <item>
+      <widget class="QListWidget" name="GunreList_widget_output"/>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="Add_Gunre_input"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Add_Gunre_botton">
+       <property name="text">
+        <string>Add Gunre</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>

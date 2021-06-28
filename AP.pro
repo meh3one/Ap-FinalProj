@@ -11,17 +11,20 @@ CONFIG += c++11
 SOURCES += \
     Admin_page/adminpage.cpp \
     Login_Sign_page/login_sign_page.cpp \
+    ReadOnly_page/readonly_page.cpp \
     main.cpp
 
 HEADERS += \
     Admin_page/adminpage.h \
     Book.h \
     Login_Sign_page/login_sign_page.h \
+    ReadOnly_page/readonly_page.h \
     User.h
 
 FORMS += \
     Admin_page/adminpage.ui \
-    Login_Sign_page/login_sign_page.ui
+    Login_Sign_page/login_sign_page.ui \
+    ReadOnly_page/readonly_page.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

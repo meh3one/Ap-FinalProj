@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(62, 219, 240);
+     <string notr="true">background-color:rgb(62, 219, 240,0.9);
 
 color: rgb(0, 0, 0);</string>
     </property>
@@ -88,10 +88,13 @@ color: rgb(0, 0, 0);</string>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>40</height>
+         <height>80</height>
         </size>
        </property>
       </spacer>
@@ -108,7 +111,7 @@ color: rgb(0, 0, 0);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 170, 255);
+     <string notr="true">background-color: rgb(255, 255, 255,.7) ;
 
 color: rgb(0, 0, 0);</string>
     </property>
@@ -123,7 +126,9 @@ color: rgb(0, 0, 0);</string>
      <item row="3" column="1">
       <widget class="QLineEdit" name="Sign_PassWord_input2">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 170, 255)</string>
+        <string notr="true">background-color:: rgba(162, 219, 250);
+
+</string>
        </property>
       </widget>
      </item>

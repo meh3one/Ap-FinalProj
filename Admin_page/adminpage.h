@@ -24,6 +24,7 @@ public:
     QList<User>  * Users_list   ;
     QList<User>  * Admins_list  ;
     QList<Book>  * Book_List    ;
+    QList<QString>  * Gunres_List  ;
 
     QListWidgetItem * Last_clicked_item ;
     QString Search_input ;
@@ -32,7 +33,7 @@ public:
 
     explicit
     AdminPage(QWidget *parent = nullptr , QWidget *LSpage=nullptr ,QList<User>  * Users_list =nullptr,
-                                        QList<User>  * Admins_list = nullptr,QList<Book>  * Book_List  =nullptr);
+              QList<User>  * Admins_list = nullptr,QList<Book>  * Book_List  =nullptr , QList<QString> * Gunres_List = nullptr);
 
     ~AdminPage()       ;
 
@@ -60,6 +61,12 @@ private slots:
     void on_Lend_botton_clicked();
 
     void on_retrevebotton_clicked();
+
+    void on_Gunre_show_button_clicked();
+
+    void on_Add_Gunre_botton_clicked();
+
+    void on_GunreList_widget_output_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::AdminPage *ui;
