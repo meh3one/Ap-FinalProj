@@ -46,6 +46,14 @@ void AdminPage::on_AddBook_widget_botton_clicked()
 {
     HideAll()     ;
     this->ui->AddBook_DigCoppy->setVisible(false) ;
+
+    this->ui->AddBook_Name_input->setText("")    ;
+    this->ui->AddBook_Writer_input->setText("")  ;
+    this->ui->AddBook_Pub_input->setText("")     ;
+    this->ui->AddBook_copies_input->setText("")  ;
+    this->ui->AddBook_DigCoppy ->setText("")     ;
+    this->ui->AddBook__output->setText("")       ;
+
     this->ui->AddBook_Widget ->setVisible(true) ;
 }
 
@@ -94,6 +102,8 @@ QString Text = this->ui->AddBook_DigCoppy->toPlainText() ;
         File.close() ;
         }
 
+this->ui->AddBook_Widget ->setVisible(false) ;
+
 RefreshList() ;
 
 }
@@ -141,6 +151,9 @@ void AdminPage::on_BookList_Widget_output_itemDoubleClicked(QListWidgetItem *ite
 this->ui->BookEdit_output  ->clear() ;
 Last_clicked_item = item ;
 item =nullptr ;
+
+this->ui->lend_name_input->setText("") ;
+this->ui->Lend_pass_input->setText("") ;
 
 int TheBook_index = FindBook_Index( Last_clicked_item , Book_List) ;
 
@@ -193,7 +206,8 @@ this->ui->Gunre_rem_combo->clear() ;
 this->ui->Gunre_Add_combo->clear() ;
     this->ui->Gunre_Add_combo->addItem("None") ;
         for(auto x : (*Gunres_List) )
-            this->ui->Gunre_Add_combo ->addItem(x) ;
+            if((*Book_List)[book_index].Gunre.contains(x)) // check if the Gunre isnt already added
+                this->ui->Gunre_Add_combo ->addItem(x) ;
 
 }
 
@@ -249,8 +263,6 @@ void AdminPage::on_Lend_botton_clicked()
 QString lendName = this -> ui -> lend_name_input ->text() ;
 QString lendPass = this -> ui ->Lend_pass_input -> text() ;
 
-
-
 if(lendName==""  || lendPass =="")
     {
     this->ui-> BookEdit_output   ->setText("Please fill all forms") ;
@@ -267,6 +279,12 @@ if( ! (*Users_list).contains(tmpUser) )
     }
 
 int book_index = FindBook_Index(Last_clicked_item ,Book_List) ;
+
+if((*Book_List)[book_index].getAvailableCopies() <= 0 )
+    {
+    this->ui-> BookEdit_output   ->setText("there is no physical coppy left") ;
+    return;
+    }
 
 (*Book_List)[book_index] .ListOfLended .append(lendName) ;
 
